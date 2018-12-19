@@ -1,6 +1,7 @@
 package org.ericmoshare;
 
 import org.ericmoshare.duixiang.jiekou.Fly;
+import org.ericmoshare.duixiang.jiekou.Hobbit;
 import org.ericmoshare.duixiang.jiekou.Run;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
@@ -19,6 +20,9 @@ public class GameTest extends BaseNGTest {
     @Autowired
     private List<Fly> flyers;
 
+    @Autowired
+    private List<Hobbit> hobbits;
+
     @Test
     public void testRun() {
 
@@ -34,4 +38,14 @@ public class GameTest extends BaseNGTest {
             flyers.get(i).fly();
         }
     }
+
+
+    @Test
+    public void testhobbit() {
+
+        for (int i = 0; i < hobbits.size(); i++) {
+            hobbits.get(i).aihao();
+        }
+    }
+
 }
