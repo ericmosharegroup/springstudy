@@ -18,4 +18,14 @@ public class Liebao extends Cat {
     public void run() {
         System.out.println("猎豹 跑 60 公里/小时");
     }
+
+    @Override
+    public Integer rate() {
+        return 60;
+    }
+
+    @Override
+    public String alias() {
+        return "猎豹";
+    }
 }

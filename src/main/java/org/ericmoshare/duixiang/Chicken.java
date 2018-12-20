@@ -18,4 +18,9 @@ public class Chicken extends Bird {
     public void fly() {
         System.out.println("fly: 每小时飞 1 公里");
     }
+
+    @Override
+    public String alias() {
+        return "鸡";
+    }
 }

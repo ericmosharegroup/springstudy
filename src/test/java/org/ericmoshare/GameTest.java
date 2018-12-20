@@ -3,6 +3,7 @@ package org.ericmoshare;
 import org.ericmoshare.duixiang.jiekou.Fly;
 import org.ericmoshare.duixiang.jiekou.Hobbit;
 import org.ericmoshare.duixiang.jiekou.Run;
+import org.ericmoshare.duixiang.service.RunRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
@@ -23,6 +24,10 @@ public class GameTest extends BaseNGTest {
     @Autowired
     private List<Hobbit> hobbits;
 
+
+    @Autowired
+    private RunRate runRate;
+
     @Test
     public void testRun() {
 
@@ -39,7 +44,6 @@ public class GameTest extends BaseNGTest {
         }
     }
 
-
     @Test
     public void testhobbit() {
 
@@ -48,4 +52,24 @@ public class GameTest extends BaseNGTest {
         }
     }
 
+    @Test
+    public void testRun2() {
+
+        for (int i = 0; i < runners.size(); i++) {
+            String msg = "" + runners.get(i).alias() + " 时速=" + runners.get(i).rate();
+            System.out.println(msg);
+        }
+    }
+
+
+    @Test
+    public void testRun3() {
+
+        List<Run> list = runRate.rateDesc();
+
+        for (int i = 0; i < list.size(); i++) {
+            String msg = "" + list.get(i).alias() + " 时速=" + list.get(i).rate();
+            System.out.println(msg);
+        }
+    }
 }

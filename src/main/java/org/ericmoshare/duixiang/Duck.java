@@ -18,4 +18,9 @@ public class Duck extends Bird {
     public void fly() {
         System.out.println("fly: 每小时飞 2 公里");
     }
+
+    @Override
+    public String alias() {
+        return "鸭子";
+    }
 }

@@ -19,4 +19,14 @@ public class Tiger extends Cat {
         System.out.println("Tiger 跑 25 公里/小时");
 
     }
+
+    @Override
+    public Integer rate() {
+        return 25;
+    }
+
+    @Override
+    public String alias() {
+        return "老虎";
+    }
 }
