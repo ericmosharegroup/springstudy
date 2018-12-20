@@ -36,6 +36,9 @@ public class AnimalTest extends BaseNGTest {
     @Resource(name = "liebao")
     private Run run;
 
+    @Resource(name = "homecat")
+    private Cat homecat;
+
 
     @Test
     public void testAnimal() {
@@ -71,5 +74,12 @@ public class AnimalTest extends BaseNGTest {
     public void testCat4() {
         hobbit.aihao();
         run.run();
+    }
+
+    @Test
+    public void testCat5() {
+        homecat.speak();
+        homecat.aihao();
+        homecat.run();
     }
 }
