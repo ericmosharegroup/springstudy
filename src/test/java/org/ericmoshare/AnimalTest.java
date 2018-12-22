@@ -3,6 +3,7 @@ package org.ericmoshare;
 import org.ericmoshare.duixiang.Animal;
 import org.ericmoshare.duixiang.Bird;
 import org.ericmoshare.duixiang.Cat;
+import org.ericmoshare.duixiang.Dog;
 import org.ericmoshare.duixiang.jiekou.Hobbit;
 import org.ericmoshare.duixiang.jiekou.Run;
 import org.testng.annotations.Test;
@@ -38,6 +39,12 @@ public class AnimalTest extends BaseNGTest {
 
     @Resource(name = "homecat")
     private Cat homecat;
+
+    @Resource(name = "hashiqi")
+    private Dog hashiqi;
+
+    @Resource(name = "jinmao")
+    private Dog jinmao;
 
 
     @Test
@@ -81,5 +88,19 @@ public class AnimalTest extends BaseNGTest {
         homecat.speak();
         homecat.aihao();
         homecat.run();
+    }
+
+    @Test
+    public void testDog() {
+        hashiqi.speak();
+        hashiqi.aihao();
+        hashiqi.run();
+    }
+
+    @Test
+    public void testDog2() {
+        jinmao.speak();
+        jinmao.aihao();
+        jinmao.run();
     }
 }

@@ -1,5 +1,6 @@
 package org.ericmoshare;
 
+import org.ericmoshare.duixiang.Dog;
 import org.ericmoshare.duixiang.jiekou.Fly;
 import org.ericmoshare.duixiang.jiekou.Hobbit;
 import org.ericmoshare.duixiang.jiekou.Run;
@@ -24,6 +25,8 @@ public class GameTest extends BaseNGTest {
     @Autowired
     private List<Hobbit> hobbits;
 
+    @Autowired
+    private List<Dog> dogs;
 
     @Autowired
     private RunRate runRate;
@@ -70,6 +73,15 @@ public class GameTest extends BaseNGTest {
         for (int i = 0; i < list.size(); i++) {
             String msg = "" + list.get(i).alias() + " 时速=" + list.get(i).rate();
             System.out.println(msg);
+        }
+    }
+
+    @Test
+    public void testDog() {
+
+        for (int i = 0; i < dogs.size(); i++) {
+           String name =  dogs.get(i).alias();
+            System.out.println("名字 "+name);
         }
     }
 }
