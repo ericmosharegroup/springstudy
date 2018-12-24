@@ -38,4 +38,33 @@ public class RateTest extends BaseNGTest {
             System.out.println(msg);
         }
     }
+
+    @Test
+    public void testRunDesc3() {
+        System.out.println("========");
+
+        List<Run> list = runRate.rateDesc();
+
+        String msg = "%s=%s,  时速=%s";
+        System.out.println(String.format(msg, "冠军", list.get(0).alias(), list.get(0).rate()));
+        System.out.println(String.format(msg, "亚军", list.get(1).alias(), list.get(1).rate()));
+        System.out.println(String.format(msg, "季军", list.get(2).alias(), list.get(2).rate()));
+    }
+
+    @Test
+    public void testRunAsc3() {
+        System.out.println("========");
+
+        List<Run> list = runRate.rateAsc();
+
+        String msg = "%s=%s,  时速=%s";
+        System.out.println(String.format(msg, "倒数第一", list.get(0).alias(), list.get(0).rate()));
+        System.out.println(String.format(msg, "倒数第二", list.get(1).alias(), list.get(1).rate()));
+        System.out.println(String.format(msg, "倒数第三", list.get(2).alias(), list.get(2).rate()));
+    }
+
+
 }
+
+
+
