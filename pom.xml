@@ -74,6 +74,13 @@
             <version>${mybatis.spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+
         <!--  测试工具类 start -->
         <dependency>
             <groupId>org.testng</groupId>

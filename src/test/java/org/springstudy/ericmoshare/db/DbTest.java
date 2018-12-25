@@ -1,5 +1,6 @@
 package org.springstudy.ericmoshare.db;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,11 +57,13 @@ public class DbTest extends BaseNGTest {
     public void testSelect() {
 
         UserExample example = new UserExample();
-        example.createCriteria().andIdGreaterThan(1L);
+        example.createCriteria().andIdGreaterThan(1L)
+        .andIdLessThan(10L);
 
         List<User> result = userRepository.selectByExample(example);
 
         System.out.println(result);
 
+        log.info("result=\n"+ JSON.toJSONString(result,true));
     }
 }
