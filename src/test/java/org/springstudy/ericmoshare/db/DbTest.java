@@ -1,0 +1,66 @@
+package org.springstudy.ericmoshare.db;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springstudy.entity.User;
+import org.springstudy.entity.UserExample;
+import org.springstudy.ericmoshare.BaseNGTest;
+import org.springstudy.repository.UserRepository;
+import org.testng.annotations.Test;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * @author Eric.Mo
+ * @since 2018/12/19
+ */
+@Slf4j
+public class DbTest extends BaseNGTest {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Test
+    public void testPrint() {
+
+        //相当于 statement.execute
+        String result = jdbcTemplate.queryForObject("SELECT username FROM t_user ", String.class);
+
+        log.info("result={}", result);
+
+    }
+
+    @Test
+    public void testInsert() {
+
+        User user = new User();
+        user.setUsername("王" + new Random().nextInt(100));
+        user.setUserMobileNo("123456");
+        user.setUserEmail("123456");
+        user.setRemark("");
+        user.setRemark2("");
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+
+        userRepository.insertSelective(user);
+
+    }
+
+    @Test
+    public void testSelect() {
+
+        UserExample example = new UserExample();
+        example.createCriteria().andIdGreaterThan(1L);
+
+        List<User> result = userRepository.selectByExample(example);
+
+        System.out.println(result);
+
+    }
+}
