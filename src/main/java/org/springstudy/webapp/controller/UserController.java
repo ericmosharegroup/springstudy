@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springstudy.entity.User;
 import org.springstudy.repository.UserRepository;
+import org.springstudy.webapp.vo.UserQueryVO;
 import org.springstudy.webapp.vo.UserVO;
 
 import javax.validation.Valid;
@@ -56,4 +57,35 @@ public class UserController {
         return new ResponseEntity<Long>(user.getId(), HttpStatus.OK);
     }
 
+
+    /**
+     * 创建用户
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/user/queryById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<User> queryById(@RequestBody @Valid UserQueryVO userVO) {
+        log.info("health_check: ok");
+
+        User user = userRepository.selectByPrimaryKey(userVO.getId());
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+
+    /**
+     * 创建用户
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/user/deleteById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Boolean> deleteById(@RequestBody @Valid UserQueryVO userVO) {
+        log.info("health_check: ok");
+
+        int result = userRepository.deleteByPrimaryKey(userVO.getId());
+        return new ResponseEntity<Boolean>(result > 0, HttpStatus.OK);
+    }
 }
