@@ -26,6 +26,7 @@
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <spring.version>4.3.16.RELEASE</spring.version>
         <testng.version>6.10</testng.version>
+        <jackson.version>2.9.0</jackson.version>
     </properties>
 
     <dependencies>
@@ -123,9 +124,9 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>commons-fileupload</groupId>-->
-            <!--<artifactId>commons-fileupload</artifactId>-->
-            <!--<version>1.3.2</version>-->
+        <!--<groupId>commons-fileupload</groupId>-->
+        <!--<artifactId>commons-fileupload</artifactId>-->
+        <!--<version>1.3.2</version>-->
         <!--</dependency>-->
         <!-- 用 spring 来写 servlet 和 jsp end<< -->
 
@@ -144,6 +145,32 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.3.5.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <!--  测试工具类 end -->
 
     </dependencies>
