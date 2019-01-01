@@ -51,6 +51,8 @@ public class DbTest extends BaseNGTest {
 
         userRepository.insertSelective(user);
 
+        System.out.println("id:"+ user.getId());
+
     }
 
     @Test

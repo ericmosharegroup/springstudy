@@ -17,8 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @RequestMapping(value = "/health_check", method = RequestMethod.GET)
+    @RequestMapping(value = "/health_check", method = {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<String> healthCheck() {
+        log.info("health_check: ok");
+        return new ResponseEntity<String>("ok", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/2/health_check", method = {RequestMethod.POST, RequestMethod.GET})
+    public ResponseEntity<String> healthCheck2() {
         log.info("health_check: ok");
         return new ResponseEntity<String>("ok", HttpStatus.OK);
     }

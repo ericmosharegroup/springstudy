@@ -103,7 +103,7 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="org.springstudy.entity.User">
+    <insert id="insert" parameterType="org.springstudy.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into t_user (id, username, user_mobile_no, 
       user_email, remark, remark2, 
       create_time, update_time)
@@ -111,7 +111,7 @@
       #{userEmail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="org.springstudy.entity.User">
+    <insert id="insertSelective" parameterType="org.springstudy.entity.User" useGeneratedKeys="true" keyProperty="id">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
