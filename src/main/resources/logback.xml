@@ -8,7 +8,9 @@
         </encoder>
     </appender>
 
-    <!--<logger name="com.xiaopeng.pay.data" level="DEBUG"/>-->
+    <!-- 日志级别 DEBUG>INFO>WARN>ERROR DEBUG 一般是开发用. 生产环境一般是INFO-->
+    <!-- 将org.springstudy.repository 打印为 debug-->
+    <logger name="org.springstudy.repository" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

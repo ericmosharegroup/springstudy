@@ -28,4 +28,13 @@ public class HelloController {
         log.info("health_check: ok");
         return new ResponseEntity<String>("ok", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/log", method = {RequestMethod.POST, RequestMethod.GET})
+    public ResponseEntity<String> log() {
+        log.debug("debug: ok");
+        log.info("info: ok");
+        log.warn("warn: ok");
+        log.error("error: ok");
+        return new ResponseEntity<String>("ok", HttpStatus.OK);
+    }
 }

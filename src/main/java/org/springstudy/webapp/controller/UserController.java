@@ -7,13 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springstudy.MessageCode;
 import org.springstudy.entity.User;
 import org.springstudy.repository.UserRepository;
+import org.springstudy.webapp.vo.Resp;
 import org.springstudy.webapp.vo.UserQueryVO;
+import org.springstudy.webapp.vo.UserUpdateVO;
 import org.springstudy.webapp.vo.UserVO;
 
 import javax.validation.Valid;
@@ -57,7 +57,6 @@ public class UserController {
         return new ResponseEntity<Long>(user.getId(), HttpStatus.OK);
     }
 
-
     /**
      * 创建用户
      * Integer 是 int 包装类. Integer = int
@@ -66,13 +65,13 @@ public class UserController {
      * @return 用户 id
      */
     @RequestMapping(value = "/user/queryById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<User> queryById(@RequestBody @Valid UserQueryVO userVO) {
+    public ResponseEntity<Resp> queryById(@RequestBody @Valid UserQueryVO userVO) {
         log.info("health_check: ok");
 
         User user = userRepository.selectByPrimaryKey(userVO.getId());
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
+        return prepareResp(user);
 
+    }
 
     /**
      * 创建用户
@@ -87,5 +86,56 @@ public class UserController {
 
         int result = userRepository.deleteByPrimaryKey(userVO.getId());
         return new ResponseEntity<Boolean>(result > 0, HttpStatus.OK);
+    }
+
+    /**
+     * json 提交用@RequestBody
+     *
+     * @param userVO
+     * @return result
+     */
+    @RequestMapping(value = "/user/updateById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> updateById(@RequestBody @Valid UserUpdateVO userVO) {
+        log.info("updateById: " + userVO.toString());
+
+        User user = new User();
+        user.setId(userVO.getId());
+        user.setUsername(userVO.getUsername());
+        user.setUserMobileNo(userVO.getUserMobileNo());
+        user.setUserEmail(userVO.getUserEmail());
+        user.setRemark(userVO.getRemark());
+        user.setRemark2(userVO.getRemark2());
+
+        int result = userRepository.updateByPrimaryKeySelective(user);
+
+        return prepareResp(result > 0);
+    }
+
+    /**
+     * form 表单提交@ModelAttribute
+     *
+     * @param userVO
+     * @return result
+     */
+    @RequestMapping(value = "/user/updateByIdAsForm", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> updateByIdAsForm(@ModelAttribute @Valid UserUpdateVO userVO) {
+        log.info("updateByIdAsForm: " + userVO.toString());
+
+        User user = new User();
+        user.setId(userVO.getId());
+        user.setUsername(userVO.getUsername());
+        user.setUserMobileNo(userVO.getUserMobileNo());
+        user.setUserEmail(userVO.getUserEmail());
+        user.setRemark(userVO.getRemark());
+        user.setRemark2(userVO.getRemark2());
+
+        int result = userRepository.updateByPrimaryKeySelective(user);
+
+        return prepareResp(result > 0);
+    }
+
+    private ResponseEntity<Resp> prepareResp(Object result) {
+        Resp resp = new Resp(MessageCode.success, result);
+        return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 }
