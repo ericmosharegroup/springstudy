@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Venus</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-Welcome to Venus !
+
+<!-- ol:organized list
+ul:unorganized list
+-->
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">主页</li>
+</ol>
+
+
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a data-toggle="tooltip" data-placement="top" title="" href="#" target="_blank">用户管理</a>
+                <span class="label label-primary">用户管理</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-inline dl-horizontal">
+                <li>
+                    <div class="col-sm-12">
+                        <a data-toggle="tooltip" data-placement="top" title="创建用户" class="text-primary text-center"
+                           href="/frontend/user/createUser_input.html" target="_blank">创建用户</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="col-sm-12">
+                        <a data-toggle="tooltip" data-placement="top" title="查找用户" class="text-primary text-center"
+                           href="/frontend/user/queryUser_input.html" target="_blank">查找用户</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+        $("[data-toggle='tooltip']").tooltip();
+    });
+</script>
+
 </body>
 </html>

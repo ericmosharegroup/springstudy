@@ -18,4 +18,7 @@ public class UserVO {
     @NotEmpty(message = "userMobileNo:必须输入")
     @Length(min = 1, max = 12, message = "userEmail:长度应在{max}位之内")
     private String userEmail;
+
+    private String remark;
+    private String remark2;
 }

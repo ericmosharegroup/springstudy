@@ -32,40 +32,40 @@ public class UserController {
     private UserRepository userRepository;
 
     /**
-     * 创建用户
+     * 创建用户,form表单提交
      * Integer 是 int 包装类. Integer = int
      * Long 是 long 的包装类
      *
      * @return 用户 id
      */
     @RequestMapping(value = "/user/create", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Long> create(@RequestBody @Valid UserVO userVO) {
-        log.info("health_check: ok");
+    public ResponseEntity<Resp> create(@ModelAttribute @Valid UserVO userVO) {
+        log.info("创建用户: " + userVO);
 
         User user = new User();
         user.setUsername(userVO.getUsername());
         user.setUserMobileNo(userVO.getUserMobileNo());
         user.setUserEmail(userVO.getUserEmail());
-        user.setRemark("");
-        user.setRemark2("");
+        user.setRemark(userVO.getRemark());
+        user.setRemark2(userVO.getRemark2());
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
 
         userRepository.insertSelective(user);
 
         log.info("创建 {}, id={}", JSON.toJSONString(userVO), user.getId());
-        return new ResponseEntity<Long>(user.getId(), HttpStatus.OK);
+        return prepareResp(user);
     }
 
     /**
-     * 创建用户
+     * 查找用户
      * Integer 是 int 包装类. Integer = int
      * Long 是 long 的包装类
      *
      * @return 用户 id
      */
     @RequestMapping(value = "/user/queryById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Resp> queryById(@RequestBody @Valid UserQueryVO userVO) {
+    public ResponseEntity<Resp> queryById(@ModelAttribute @Valid UserQueryVO userVO) {
         log.info("health_check: ok");
 
         User user = userRepository.selectByPrimaryKey(userVO.getId());
