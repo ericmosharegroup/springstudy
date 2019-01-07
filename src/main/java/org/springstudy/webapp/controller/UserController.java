@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springstudy.MessageCode;
 import org.springstudy.entity.User;
 import org.springstudy.repository.UserRepository;
-import org.springstudy.webapp.vo.Resp;
-import org.springstudy.webapp.vo.UserQueryVO;
-import org.springstudy.webapp.vo.UserUpdateVO;
-import org.springstudy.webapp.vo.UserVO;
+import org.springstudy.webapp.vo.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -81,11 +78,11 @@ public class UserController {
      * @return 用户 id
      */
     @RequestMapping(value = "/user/deleteById", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Boolean> deleteById(@RequestBody @Valid UserQueryVO userVO) {
+    public ResponseEntity<Resp> deleteById(@ModelAttribute @Valid UserDeleteVO userVO) {
         log.info("health_check: ok");
 
         int result = userRepository.deleteByPrimaryKey(userVO.getId());
-        return new ResponseEntity<Boolean>(result > 0, HttpStatus.OK);
+        return prepareResp(result > 0);
     }
 
     /**

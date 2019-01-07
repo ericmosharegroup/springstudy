@@ -4,7 +4,7 @@ package org.springstudy.webapp.vo;
 import lombok.Data;
 
 @Data
-public class UserDelectVO {
+public class UserDeleteVO {
 
     private Long id;
 
