@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>创建用户</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">JS创建用户</li>
+</ol>
+
+
+<div class="container">
+    <form id="myForm" class="form-horizontal" role="form" action="/user/create" method="post" style="margin-top:-20px">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>用户名</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="username" value="王二"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>手机号</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="userMobileNo" value="13800138000" placeholder="必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>邮箱</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="userEmail" value="123@qq.com" placeholder="必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>备注</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="remark" value="" placeholder="非必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>备注2</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="remark2" value="" placeholder="非必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info" onclick="submitByClick()">提交</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<script>
+
+    /**
+     * 提交form 表单, 由按钮触发
+     */
+    function submitByClick() {
+
+        document.getElementById("myForm").submit();
+
+//        var form = new FormData(document.getElementById("myForm"));
+//
+//        var url = "http://localhost:8080/user/create";
+////        sendAjax("http://localhost:8080/user/create", form, function (data, status) {
+////           // console.info("success");
+////        })
+//        $.ajax({
+//            url: url,
+//            type: "post",
+//            dataType: 'json',
+//            contentType: "application/json",
+//            data: form,
+//            success: function (data, status) {
+//                console.info("call success:" + data.data.respCode);
+//                alert("success,"+ data)
+//                callback(data, status);
+//            },
+//            error: function (data, status) {
+//                console.error("call failed:" + JSON.stringify(data));
+//                alert("failed,"+ data)
+//                callback(data, status);
+//            }
+//        });
+
+    }
+
+
+    function sendAjax(url, data, callback) {
+        $.ajax({
+            url: url,
+            type: "post",
+            dataType: 'json',
+            contentType: "application/json",
+            data: data,
+            success: function (data, status) {
+                console.info("call success:" + data.data.respCode);
+                callback(data, status);
+            },
+            error: function (data, status) {
+                console.error("call failed:" + JSON.stringify(data));
+                callback(data, status);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
