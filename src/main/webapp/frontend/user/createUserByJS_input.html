@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../static/css/colorjson.css"/>
+    <script type="text/javascript" src="../static/script/colorjson.js"></script>
+    <script type="text/javascript" src="../static/script/myAjax.js"></script>
+
 </head>
 <body>
 
@@ -60,63 +65,35 @@
                 <button type="submit" class="btn btn-info" onclick="submitByClick()">提交</button>
             </div>
         </div>
-
     </form>
+
+    <div class="form-group">
+        <label for="message">response</label>
+        <pre id="message" text=""></pre>
+    </div>
 </div>
 
 
-<script>
+<script type="text/javascript">
 
     /**
      * 提交form 表单, 由按钮触发
      */
     function submitByClick() {
 
-        document.getElementById("myForm").submit();
+        $('#myForm').bind('submit', function () {
+            ajaxSubmit(this, function (data, status) {
+                //callback 函数
+                console.log("return status:" + status + ", data:" + JSON.stringify(data));
 
-//        var form = new FormData(document.getElementById("myForm"));
-//
-//        var url = "http://localhost:8080/user/create";
-////        sendAjax("http://localhost:8080/user/create", form, function (data, status) {
-////           // console.info("success");
-////        })
-//        $.ajax({
-//            url: url,
-//            type: "post",
-//            dataType: 'json',
-//            contentType: "application/json",
-//            data: form,
-//            success: function (data, status) {
-//                console.info("call success:" + data.data.respCode);
-//                alert("success,"+ data)
-//                callback(data, status);
-//            },
-//            error: function (data, status) {
-//                console.error("call failed:" + JSON.stringify(data));
-//                alert("failed,"+ data)
-//                callback(data, status);
-//            }
-//        });
+                $('#message').html(syntaxHighlight(JSON.parse(JSON.stringify(data))));
 
-    }
+            });
 
-
-    function sendAjax(url, data, callback) {
-        $.ajax({
-            url: url,
-            type: "post",
-            dataType: 'json',
-            contentType: "application/json",
-            data: data,
-            success: function (data, status) {
-                console.info("call success:" + data.data.respCode);
-                callback(data, status);
-            },
-            error: function (data, status) {
-                console.error("call failed:" + JSON.stringify(data));
-                callback(data, status);
-            }
+            return false;
         });
+
+
     }
 
 </script>

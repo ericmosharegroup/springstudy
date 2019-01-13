@@ -133,6 +133,8 @@ public class UserController {
 
     private ResponseEntity<Resp> prepareResp(Object result) {
         Resp resp = new Resp(MessageCode.success, result);
+
+        log.info("return " + JSON.toJSONString(resp, true));
         return new ResponseEntity<>(resp, HttpStatus.OK);
     }
 }
