@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>创建资产</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../static/css/colorjson.css"/>
+    <script type="text/javascript" src="../static/script/colorjson.js"></script>
+    <script type="text/javascript" src="../static/script/myAjax.js"></script>
+
+</head>
+<body>
+
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">创建资产</li>
+</ol>
+
+
+<div class="container">
+    <form id="myForm" class="form-horizontal" role="form" action="/account/create" method="post" style="margin-top:-20px">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户名称</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="accountName" value="现金钱包"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>余额</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="balance" value="0"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="remark" value="" placeholder="非必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户类型</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="accountType">
+                    <option value="Fund" selected>资金账户</option>
+                    <option value="Receivable">应收账户</option>
+                    <option value="Payable">应付账户</option>
+                    <option value="">空</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info" onclick="submitByClick()">提交</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="form-group">
+        <label for="message">response</label>
+        <pre id="message" text=""></pre>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    /**
+     * 提交form 表单, 由按钮触发
+     */
+    function submitByClick() {
+
+        $('#myForm').bind('submit', function () {
+            ajaxSubmit(this, function (data, status) {
+                //callback 函数
+                console.log("return status:" + status + ", data:" + JSON.stringify(data));
+
+                $('#message').html(syntaxHighlight(JSON.parse(JSON.stringify(data))));
+
+            });
+
+            return false;
+        });
+
+
+    }
+
+</script>
+</body>
+</html>

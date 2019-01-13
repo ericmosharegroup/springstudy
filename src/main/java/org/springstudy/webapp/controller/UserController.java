@@ -23,7 +23,7 @@ import java.util.Date;
 @Slf4j
 @Controller
 @RestController
-public class UserController {
+public class UserController extends AbstractController {
 
     @Autowired
     private UserRepository userRepository;
@@ -131,10 +131,5 @@ public class UserController {
         return prepareResp(result > 0);
     }
 
-    private ResponseEntity<Resp> prepareResp(Object result) {
-        Resp resp = new Resp(MessageCode.success, result);
 
-        log.info("return " + JSON.toJSONString(resp, true));
-        return new ResponseEntity<>(resp, HttpStatus.OK);
-    }
 }
