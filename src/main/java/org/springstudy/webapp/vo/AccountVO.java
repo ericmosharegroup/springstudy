@@ -21,4 +21,12 @@ public class AccountVO {
     private String accountType;
 
     private String remark;
+
+    @NotEmpty(message = "cardType:必须输入")
+    @Length(min = 1, max = 12, message = "cardType:长度应在{max}位之内")
+    private String cardType;
+
+    @NotEmpty(message = "userId:必须输入")
+    @Length(min = 1, max = 12, message = "userId:长度应在{max}位之内")
+    private String userId;
 }

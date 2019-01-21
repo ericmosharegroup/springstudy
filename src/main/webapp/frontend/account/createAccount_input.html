@@ -26,6 +26,13 @@
     <form id="myForm" class="form-horizontal" role="form" action="/account/create" method="post" style="margin-top:-20px">
 
         <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>用户ID</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="userId" value="10086"/>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-sm-2 control-label"><font color="red">*</font>账户名称</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="accountName" value="现金钱包"/>
@@ -56,6 +63,17 @@
                     <option value="Receivable">应收账户</option>
                     <option value="Payable">应付账户</option>
                     <option value="">空</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户类型</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="cardType">
+                    <option value="OTHERS" selected>其他</option>
+                    <option value="DEBIT">借记卡</option>
+                    <option value="CREDIT">信用卡</option>
                 </select>
             </div>
         </div>
@@ -92,8 +110,6 @@
 
             return false;
         });
-
-
     }
 
 </script>

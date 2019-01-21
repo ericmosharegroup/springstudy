@@ -2,6 +2,7 @@ package org.springstudy.entity;
 
 import lombok.Data;
 import org.springstudy.enums.AccountTypeEnum;
+import org.springstudy.enums.CardTypeEnum;
 
 import java.util.Date;
 
@@ -9,17 +10,24 @@ import java.util.Date;
 public class Account {
     private Long id;
 
-    private String accountName;
+    private String userId;
+
+    private Long drAmount;
+
+    private Long crAmount;
 
     private Long balance;
+
+    private CardTypeEnum cardType;
+
+    private String accountName;
 
     private AccountTypeEnum accountType;
 
     private String remark;
 
-    private String remark2;
-
     private Date createTime;
 
     private Date updateTime;
+
 }
