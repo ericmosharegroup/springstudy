@@ -45,6 +45,14 @@ ul:unorganized list
                 document.getElementById("totalAsset").innerText = data.data.totalAsset;
                 document.getElementById("plainAsset").innerText = data.data.plainAsset;
                 document.getElementById("totalDebt").innerText = data.data.totalDebt;
+
+                //资金账户
+                document.getElementById("fundCount").innerText = data.data.fundCount;
+                document.getElementById("fundBalance").innerText = data.data.fundBalance;
+
+                //应收账户
+                document.getElementById("receivableCount").innerText = data.data.receivableCount;
+                document.getElementById("receivableBalance").innerText = data.data.receivableBalance;
             },
             error: function (data, status) {
                 //失败
@@ -78,6 +86,62 @@ ul:unorganized list
             </div>
         </div>
     </form>
+
+    <p>资产账户</p>
+
+
+    <div id="zhanghu">
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle btn-lg"
+                        data-toggle="dropdown">
+                        <span class="caret"></span>资金账户&nbsp;<span id="fundCount">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span id="fundBalance" class="text-right">0</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">招商银行</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">现金钱包</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">中国银行</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle btn-lg"
+                        data-toggle="dropdown">
+                    <span class="caret"></span>应收账户&nbsp;<span id="receivableCount">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="receivableBalance" class="text-right">0</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">招商银行</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">现金钱包</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">中国银行</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle btn-lg"
+                        data-toggle="dropdown">
+                    <span class="caret"></span>应付账户&nbsp;1
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">招商银行</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">现金钱包</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">中国银行</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 

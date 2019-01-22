@@ -109,6 +109,59 @@ public class AccountController extends AbstractController {
         map.put("totalDebt", MoneyUtils.fenToYuan(crAmount));
         map.put("plainAsset", MoneyUtils.fenToYuan(drAmount - crAmount));
 
+        //统计资金账户的余额
+        //资金账户数量
+        int fundCount = 0;
+        Long fundDrAmount = 0L;
+        Long fundCrAmount = 0L;
+        if (!CollectionUtils.isEmpty(list)) {
+            //遍历
+            for (Account entity : list) {
+                if (entity.getAccountType() == AccountTypeEnum.Fund) {
+                    log.debug("//   get 资金账户:" + entity);
+                    fundCount = fundCount + 1;
+                    fundDrAmount = fundDrAmount + entity.getDrAmount();
+                    fundCrAmount = fundCrAmount + entity.getCrAmount();
+                }
+            }
+        }
+        map.put("fundCount", String.valueOf(fundCount));
+        map.put("fundBalance", MoneyUtils.fenToYuan(fundDrAmount - fundCrAmount));
+
+        int receivableCount = 0;
+        Long receivableDrAmount = 0L;
+        Long receivableCrAmount = 0L;
+        if (!CollectionUtils.isEmpty(list)) {
+            //遍历
+            for (Account entity : list) {
+                if (entity.getAccountType() == AccountTypeEnum.Receivable) {
+                    log.debug("//   get 应收账户:" + entity);
+                    receivableCount = receivableCount + 1;
+                    receivableDrAmount = receivableDrAmount + entity.getDrAmount();
+                    receivableCrAmount = receivableCrAmount + entity.getCrAmount();
+                }
+            }
+        }
+        map.put("receivableCount", String.valueOf(receivableCount));
+        map.put("receivableBalance", MoneyUtils.fenToYuan(receivableDrAmount - receivableCrAmount));
+
+        int payableCount = 0;
+        Long payableDrAmount = 0L;
+        Long payableCrAmount = 0L;
+        if (!CollectionUtils.isEmpty(list)) {
+            //遍历
+            for (Account entity : list) {
+                if (entity.getAccountType() == AccountTypeEnum.Payable) {
+                    log.debug("//   get 应付账户:" + entity);
+                    payableCount = payableCount + 1;
+                    payableDrAmount = payableDrAmount + entity.getDrAmount();
+                    payableCrAmount = payableCrAmount + entity.getCrAmount();
+                }
+            }
+        }
+        map.put("payableCount", String.valueOf(receivableCount));
+        map.put("payableBalance", MoneyUtils.fenToYuan(payableDrAmount - payableCrAmount));
+
         log.info("{} 的资产为:{}", userId, JSON.toJSONString(map, true));
         return prepareResp(map);
     }
