@@ -1,0 +1,9 @@
+TRUNCATE account;
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (1, '10086', 15000, 0, 15000, '招商银行', '0', '1', '招商银行尾号0086', '2019-01-21 22:00:54', '2019-01-22 22:27:55');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (2, '10086', 0, 25090, 25090, '招商银行', '0', '2', '招商银行尾号0091', '2019-01-21 22:00:54', '2019-01-22 22:28:01');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (4, '10086', 36080, 0, 36080, '现金钱包', '0', '1', '现金钱包', '2019-01-21 22:03:19', '2019-01-21 22:52:45');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (7, '10086', 0, 16000, 16000, '中国银行', '0', '2', '中国银行尾号0061', '2019-01-21 22:15:26', '2019-01-22 22:28:09');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (8, '10086', 500000, 0, 500000, '应收账户', '1', '0', '借给王富贵', '2019-01-22 22:28:54', '2019-01-22 22:30:38');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (9, '10086', 100000, 0, 100000, '应收账户2', '1', '0', '借给李四', '2019-01-22 22:35:49', '2019-01-22 22:35:49');
+INSERT INTO `account`(`id`, `user_id`, `dr_amount`, `cr_amount`, `balance`, `account_name`, `account_type`, `card_type`, `remark`, `create_time`, `update_time`) VALUES (13, '10086', 0, 50000, 50000, '应付资产', '2', '0', '向张三借入', '2019-01-22 22:36:46', '2019-01-22 22:36:46');
+
