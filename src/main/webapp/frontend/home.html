@@ -189,7 +189,7 @@ ul:unorganized list
                     var balance = arr[index].drAmount - arr[index].crAmount;
                     balance = change(balance);
                     document.getElementById("" + accountTabName).innerHTML += '<li><a href="#">' + arr[index].accountName
-                        + '&nbsp;<span class="help-block">' + arr[index].remark + '</span>&nbsp;&nbsp;'
+                        + '&nbsp;' + arr[index].remark + '&nbsp;&nbsp;'
                         + balance
                         //  +'<span>'+arr[index].drAmount-arr[index].crAmount+'</span>'+
                         + '</a></li><li class="divider"></li>';
