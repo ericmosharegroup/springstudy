@@ -14,6 +14,7 @@ import org.springstudy.enums.AccountTypeEnum;
 import org.springstudy.enums.CardTypeEnum;
 import org.springstudy.repository.AccountRepository;
 import org.springstudy.utils.MoneyUtils;
+import org.springstudy.webapp.vo.AccountQueryVO;
 import org.springstudy.webapp.vo.AccountVO;
 import org.springstudy.webapp.vo.Resp;
 
@@ -166,4 +167,25 @@ public class AccountController extends AbstractController {
         return prepareResp(map);
     }
 
+    /**
+     * 根据账户类型查询所有账户,form表单提交
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/account/queryAccounts", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> queryAccounts(@ModelAttribute @Valid AccountQueryVO vo) {
+        log.info("查询账户: " + vo);
+
+        AccountExample example = new AccountExample();
+        example.createCriteria()
+                .andUserIdEqualTo(vo.getUserId())
+                .andAccountTypeEqualTo(vo.getAccountType());
+
+        List<Account> list = accountRepository.selectByExample(example);
+
+        log.info("{} 的资产为:{}", vo.getUserId(), JSON.toJSONString(list));
+        return prepareResp(list);
+    }
 }
