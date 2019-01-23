@@ -53,6 +53,10 @@ ul:unorganized list
                 //应收账户
                 document.getElementById("receivableCount").innerText = data.data.receivableCount;
                 document.getElementById("receivableBalance").innerText = data.data.receivableBalance;
+
+                //应付账户
+                document.getElementById("payableCount").innerText = data.data.payableCount;
+                document.getElementById("payableBalance").innerText = data.data.payableBalance;
             },
             error: function (data, status) {
                 //失败
@@ -130,7 +134,8 @@ ul:unorganized list
             <div class="btn-group">
                 <button type="button" class="btn dropdown-toggle btn-lg"
                         data-toggle="dropdown">
-                    <span class="caret"></span>应付账户&nbsp;1
+                    <span class="caret"></span>应付账户&nbsp;<span id="payableCount">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span id="payableBalance" class="text-right">0</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#">招商银行</a></li>
