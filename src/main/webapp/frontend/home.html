@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="static/css/colorjson.css"/>
     <script type="text/javascript" src="static/script/colorjson.js"></script>
     <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
     <style type="text/css">
         p, div {
             font-family: Verdana, Arial;
@@ -161,6 +163,7 @@ ul:unorganized list
 
 <script>
 
+
     //查应收账户
     function queryAccountByUserId(userId, accountType, accountTabName) {
         console.log("accountTabName=" + accountTabName);
@@ -183,11 +186,21 @@ ul:unorganized list
 
                     var balance = arr[index].drAmount - arr[index].crAmount;
                     balance = change(balance);
-                    document.getElementById("" + accountTabName).innerHTML += '<li><a href="#">' + arr[index].accountName
-                        + '&nbsp;' + arr[index].remark + '&nbsp;&nbsp;'
-                        + balance
-                        //  +'<span>'+arr[index].drAmount-arr[index].crAmount+'</span>'+
-                        + '</a></li><li class="divider"></li>';
+
+                    var redirect = "";
+                    if (arr[index].accountType == 'Fund') {
+
+                        if (arr[index].cardType == 'CREDIT') {
+                            //如果是信用卡
+                            redirect = "/frontend/fundCreditDetail.html";
+                        } else {
+                            //如果是储蓄卡和无卡,比如现金钱包
+                            redirect = "/frontend/fundDebitDetail.html";
+                        }
+                    }
+                    var str = "<li><a href=\"" + redirect + "?userId={0}&id={1}\"> {2}     {3}     {4} </a></li><li class=\"divider\"></li>"
+                            .format(arr[index].userId, arr[index].id, arr[index].accountName, arr[index].remark, balance);
+                    document.getElementById("" + accountTabName).innerHTML += str;
                 }
                 //资金账户
 
@@ -201,11 +214,7 @@ ul:unorganized list
         });
     }
 
-    function change(fen) {
-        var yuan = fen / 100.0;
-        //保留2位小数点
-        return yuan.toFixed(2);
-    }
+
 </script>
 </body>
 </html>

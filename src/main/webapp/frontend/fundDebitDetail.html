@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Venus</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/colorjson.css"/>
+    <script type="text/javascript" src="static/script/colorjson.js"></script>
+    <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
+    <style type="text/css">
+        p, div {
+            font-family: Verdana, Arial;
+            font-size: 32px;
+        }
+    </style>
+
+    <script>
+        var url = window.location.search;
+        //url=?userId=10086&id=4
+        console.log("url=" + url);
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "/account/queryAccountDetail" + url, //路径, 比如/user/create
+                type: "post",
+                data: null,
+                success: function (data, status) {
+                    //成功
+                    console.log("call success:" + JSON.stringify(data));
+                    //callback(data, status);
+                    document.getElementById("accountName").innerText = data.data.accountName;
+                    document.getElementById("accountRemark").innerText = data.data.remark;
+                    document.getElementById("accountBalance").innerText = change(data.data.balance);
+
+                },
+                error: function (data, status) {
+                    //失败
+                    console.error("call fail:" + data);
+                    //callback(data, status);
+                }
+            });
+
+        })
+    </script>
+</head>
+<body>
+
+<!-- ol:organized list
+ul:unorganized list
+-->
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">资产详情</li>
+</ol>
+
+<script>
+
+
+</script>
+
+<div class="container">
+    <form id="myForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="jumbotron" style="background: darkorange">
+                    <div class="row">
+                        <div class="col-sm-4" style="font-size: 32px;" id="accountName">
+                        </div>
+                        <div class="col-sm-4" style="font-size: 32px;" id="accountRemark">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p>账户余额(元)</p>
+                        <div class="col-sm-6" id="accountBalance">
+                            0.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

@@ -53,3 +53,4 @@ function sendAjax(url, data, callback) {
         }
     });
 }
+

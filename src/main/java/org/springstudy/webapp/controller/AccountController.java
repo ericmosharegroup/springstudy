@@ -14,6 +14,7 @@ import org.springstudy.enums.AccountTypeEnum;
 import org.springstudy.enums.CardTypeEnum;
 import org.springstudy.repository.AccountRepository;
 import org.springstudy.utils.MoneyUtils;
+import org.springstudy.webapp.vo.AccountDetailQueryVO;
 import org.springstudy.webapp.vo.AccountQueryVO;
 import org.springstudy.webapp.vo.AccountVO;
 import org.springstudy.webapp.vo.Resp;
@@ -188,4 +189,36 @@ public class AccountController extends AbstractController {
         log.info("{} 的资产为:{}", vo.getUserId(), JSON.toJSONString(list));
         return prepareResp(list);
     }
+
+
+    /**
+     * 根据账户detail详情,form表单提交
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/account/queryAccountDetail", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> queryAccountDetail(@ModelAttribute @Valid AccountDetailQueryVO vo) {
+        log.info("查询账户detail: " + vo);
+
+        AccountExample example = new AccountExample();
+        example.createCriteria()
+                .andUserIdEqualTo(vo.getUserId())
+                .andIdEqualTo(Long.valueOf(vo.getId()));
+
+        List<Account> list = accountRepository.selectByExample(example);
+
+        //判断这个集合(list, set)是不是空的
+        if (CollectionUtils.isEmpty(list)) {
+            //遍历
+            log.info("{} 的资产detail为:null", vo.getUserId());
+            return prepareResp(null);
+        }
+
+
+        log.info("{} 的资产detail为:{}", vo.getUserId(), list.get(0));
+        return prepareResp(list.get(0));
+    }
+
 }
