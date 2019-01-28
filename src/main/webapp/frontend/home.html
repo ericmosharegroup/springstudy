@@ -197,6 +197,14 @@ ul:unorganized list
                             //如果是储蓄卡和无卡,比如现金钱包
                             redirect = "/frontend/fundDebitDetail.html";
                         }
+                    } else if (arr[index].accountType == 'Receivable'){
+                        //如果是应收账户
+                        redirect = "/frontend/receivableDetail.html";
+
+                    } else {
+                        //其他则为应付账户
+                        redirect = "/frontend/payableDetail.html";
+
                     }
                     var str = "<li><a href=\"" + redirect + "?userId={0}&id={1}\"> {2}     {3}     {4} </a></li><li class=\"divider\"></li>"
                             .format(arr[index].userId, arr[index].id, arr[index].accountName, arr[index].remark, balance);
