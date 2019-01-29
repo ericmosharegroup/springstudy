@@ -31,3 +31,18 @@ CREATE TABLE `account` (
     `update_time` TIMESTAMP NOT NULL DEFAULT '2010-09-10 10:30:50' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8 COMMENT '资产账户表';
+
+
+DROP TABLE IF EXISTS `month_bill`;
+CREATE TABLE `month_bill` (
+    `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
+    `user_id` varchar(64) NOT NULL DEFAULT '' COMMENT '用户 id',
+    `dr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '借方金额',
+    `cr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '贷方金额',
+    `balance` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '余额,如钱包余额',
+    `account_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账户id',
+    `tx_month` varchar(6) NOT NULL DEFAULT '' COMMENT '交易月,如201901',
+    `start_date` varchar(4) NOT NULL DEFAULT '' COMMENT '账单周期开始日期',
+    `end_date` varchar(4) NOT NULL DEFAULT '' COMMENT '账单周期结束日期',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET = utf8 COMMENT '每月余额表';
