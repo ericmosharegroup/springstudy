@@ -49,7 +49,7 @@ CREATE TABLE `month_bill` (
 
 
 DROP TABLE IF EXISTS `day_bill`;
-CREATE TABLE `month_bill` (
+CREATE TABLE `day_bill` (
     `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `user_id` varchar(64) NOT NULL DEFAULT '' COMMENT '用户 id',
     `dr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '借方金额',
