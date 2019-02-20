@@ -48,19 +48,17 @@ CREATE TABLE `month_bill` (
 ) ENGINE = InnoDB CHARSET = utf8 COMMENT '每月余额表';
 
 
-DROP TABLE IF EXISTS `day_bill`;
-CREATE TABLE `day_bill` (
+DROP TABLE IF EXISTS `daily_bill`;
+CREATE TABLE `daily_bill` (
     `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
-    `user_id` varchar(64) NOT NULL DEFAULT '' COMMENT '用户 id',
+    `user_id` varchar(64) NOT NULL DEFAULT '' COMMENT '用户id',
+    `tx_year` varchar(4) NOT NULL DEFAULT '' COMMENT '交易年,如2019',
+    `tx_month` varchar(6) NOT NULL DEFAULT '' COMMENT '交易月份,如201901',
+    `tx_date` varchar(8) NOT NULL DEFAULT '' COMMENT '交易日期,如20190125',
     `dr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '借方金额',
     `cr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '贷方金额',
-    `balance` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '余额,如钱包余额',
     `account_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账户id',
-    `transaction_type` varchar(10) NOT NULL DEFAULT '0' COMMENT '交易类型',
+    `tx_type` varchar(10) NOT NULL DEFAULT '0' COMMENT '交易类型,支出-0,收入-1,转账-2',
     `remark` varchar(64) NOT NULL DEFAULT '' COMMENT '备注',
-    `tx_month` varchar(6) NOT NULL DEFAULT '' COMMENT '交易月,如201901',
-    `tx_day` varchar(6) NOT NULL DEFAULT '' COMMENT '交易日,如0125',
-    `start_date` varchar(4) NOT NULL DEFAULT '' COMMENT '账单周期开始日期',
-    `end_date` varchar(4) NOT NULL DEFAULT '' COMMENT '账单周期结束日期',
     PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARSET = utf8 COMMENT '每日余额表';
+) ENGINE = InnoDB CHARSET = utf8 COMMENT '交易明细表, 记录每一笔支出/收入交易';
