@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Venus</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/colorjson.css"/>
+    <link rel="stylesheet" href="static/css/footer.css"/>
+    <script type="text/javascript" src="static/script/colorjson.js"></script>
+    <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
+</head>
+<body>
+
+<!-- ol:organized list
+ul:unorganized list
+-->
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">主页</li>
+</ol>
+
+
+<div class="container">
+    <ul id="myTab" class="nav nav-pills nav-justified">
+        <li class="active">
+            <a href="#liuru" data-toggle="tab" style="font-size: 32px;">流出</a>
+        </li>
+        <li>
+            <a href="#liuchu" data-toggle="tab" style="font-size: 32px;">流入</a>
+        </li>
+        <li>
+            <a href="#zhuanzhang" data-toggle="tab" style="font-size: 32px;">内部转账</a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="liuru">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <br/>
+                        <p style="font-size: 32px;">现金钱包</p>
+                    </div>
+
+                    <div class="col-sm-4 text-right">
+                        <br/><span class="text-right" style="font-size: 40px;">¥ 0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <tbody style="font-size: 30px;">
+                    <tr>
+                        <td>餐饮</td>
+                        <td>零食</td>
+                        <td>购物</td>
+                        <td>住房</td>
+                        <td>交通</td>
+                    </tr>
+                    <tr>
+                        <td>娱乐</td>
+                        <td>文教</td>
+                        <td>汽车</td>
+                        <td>通讯</td>
+                        <td>育儿</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-6" style="font-size: 25px;">
+                <input type="date" value="2019-02-25">
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control"
+                       style="font-size: 25px;" placeholder="请输入备注消息(最多140字)">
+            </div>
+            <br>
+
+            <div>
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="liuchu">
+            <p>流出</p>
+        </div>
+        <div class="tab-pane fade" id="zhuanzhang">
+            <p>转账</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

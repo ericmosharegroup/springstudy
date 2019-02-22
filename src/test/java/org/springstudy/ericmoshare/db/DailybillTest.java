@@ -32,12 +32,12 @@ public class DailybillTest extends BaseNGTest {
         dailybill.setUserId("10086");
         dailybill.setTxYear("2019");
         dailybill.setTxMonth("201901");
-        dailybill.setTxDate("20190125");
-        dailybill.setDrAmount(1000L);
-        dailybill.setCrAmount(2000L);
+        dailybill.setTxDate("20190126");
+        dailybill.setDrAmount(2000L);
+        dailybill.setCrAmount(4000L);
         dailybill.setAccountId(1L);
         dailybill.setTxType("1");
-        dailybill.setRemark("吃饭");
+        dailybill.setRemark("");
 
         dailybillRepository.insertSelective(dailybill);
     }
