@@ -14,6 +14,7 @@
     <script type="text/javascript" src="static/script/myAjax.js"></script>
     <script type="text/javascript" src="static/script/sys.js"></script>
 
+
 </head>
 <body>
 
@@ -42,56 +43,60 @@ ul:unorganized list
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="liuru">
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <br/>
-                        <p style="font-size: 32px;">现金钱包</p>
+            <form id="myForm" class="form-horizontal" role="form" action="/dailybill/create" method="post">
+                    <div class="form-group col-sm-12">
+                        <div class="col-sm-6">
+                            <br/>
+                            <p style="font-size: 32px;">现金钱包</p>
+                        </div>
+
+                        <div class="col-sm-4 text-right">
+                            <br/><span class="text-right" style="font-size: 40px;">¥ 0.00</span>
+                        </div>
                     </div>
 
-                    <div class="col-sm-4 text-right">
-                        <br/><span class="text-right" style="font-size: 40px;">¥ 0.00</span>
+                <div>
+                    <div class="form-group">
+                        <table class="table">
+                            <tbody style="font-size: 30px;">
+                            <tr>
+                                <td>餐饮</td>
+                                <td>零食</td>
+                                <td>购物</td>
+                                <td>住房</td>
+                                <td>交通</td>
+                            </tr>
+                            <tr>
+                                <td>娱乐</td>
+                                <td>文教</td>
+                                <td>汽车</td>
+                                <td>通讯</td>
+                                <td>育儿</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-            <div>
-                <table class="table">
-                    <tbody style="font-size: 30px;">
-                    <tr>
-                        <td>餐饮</td>
-                        <td>零食</td>
-                        <td>购物</td>
-                        <td>住房</td>
-                        <td>交通</td>
-                    </tr>
-                    <tr>
-                        <td>娱乐</td>
-                        <td>文教</td>
-                        <td>汽车</td>
-                        <td>通讯</td>
-                        <td>育儿</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
 
-            <div class="col-sm-6" style="font-size: 25px;">
-                <input type="date" value="2019-02-25">
-            </div>
-            <div class="input-group">
-                <input type="text" class="form-control"
-                       style="font-size: 25px;" placeholder="请输入备注消息(最多140字)">
-            </div>
-            <br>
-
-            <div>
-                <form role="form">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <div class="col-sm-6" style="font-size: 25px;">
+                            <input type="date" value="2019-02-25">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   style="font-size: 25px;" placeholder="请输入备注消息(最多140字)">
+                        </div>
                     </div>
-                </form>
-            </div>
 
+                    <div class="form-group">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+            </form>
         </div>
 
         <div class="tab-pane fade" id="liuchu">

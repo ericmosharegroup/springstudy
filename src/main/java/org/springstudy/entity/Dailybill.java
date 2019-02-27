@@ -1,6 +1,7 @@
 package org.springstudy.entity;
 
 import lombok.Data;
+import org.springstudy.enums.TxTypeEnum;
 
 @Data
 public class Dailybill {
@@ -20,7 +21,7 @@ public class Dailybill {
 
     private Long accountId;
 
-    private String txType;
+    private TxTypeEnum txType;
 
     private String remark;
 
