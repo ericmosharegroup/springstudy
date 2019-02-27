@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springstudy.entity.Account;
-import org.springstudy.entity.AccountExample;
 import org.springstudy.entity.Dailybill;
 import org.springstudy.enums.AccountTypeEnum;
 import org.springstudy.enums.CardTypeEnum;
@@ -19,11 +17,8 @@ import org.springstudy.repository.DailybillRepository;
 import org.springstudy.utils.MoneyUtils;
 import org.springstudy.webapp.vo.*;
 
+import javax.smartcardio.Card;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Eric.Mo
@@ -37,6 +32,9 @@ public class DailybillController extends AbstractController {
     @Autowired
     private DailybillRepository dailybillRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
     /**
      * 创建账户,form表单提交
      * Integer 是 int 包装类. Integer = int
@@ -48,21 +46,47 @@ public class DailybillController extends AbstractController {
     public ResponseEntity<Resp> create(@ModelAttribute @Valid DailybillVO vo) {
         log.info("创建账单: " + vo);
 
-        Dailybill db = new Dailybill();
-        db.setUserId(vo.getUserId());
-        db.setTxYear(vo.getTx_year());
-        db.setTxMonth(vo.getTx_month());
-        db.setTxDate(vo.getTx_date());
-        db.setTxType(TxTypeEnum.valueOf(vo.getTx_type()));
-        db.setRemark(vo.getRemark());
-        db.setAccountId(vo.getAccount_id());
-        db.setDrAmount(vo.getDr_amount());
-        db.setCrAmount(vo.getCr_amount());
+        String txDate = vo.getTxDate();
+        txDate = txDate.replaceAll("-", "");
 
-        dailybillRepository.insertSelective(db);
+        Dailybill model = new Dailybill();
+        model.setUserId(vo.getUserId());
+        model.setTxDate(txDate);
+        model.setTxType(TxTypeEnum.valueOf(vo.getTxType()));
+        model.setRemark(vo.getRemark());
+        model.setAccountId(vo.getAccountId());
+        model.setTxAmount(MoneyUtils.yuanToFen(vo.getTxAmount()));
 
-        log.info("创建 {}, id={}", JSON.toJSONString(vo), db.getId());
-        return prepareResp(db);
+        //拿到账户id
+        Account account = accountRepository.selectByPrimaryKey(vo.getAccountId());
+
+        AccountTypeEnum accountType = account.getAccountType();
+        if (accountType == AccountTypeEnum.Fund) {
+            //资金账户
+            //借记卡, 信用卡
+            if (model.getTxType() == TxTypeEnum.Income) {
+                model.setDrAmount(model.getTxAmount());
+            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+                model.setCrAmount(model.getTxAmount());
+            }
+        } else if (accountType == AccountTypeEnum.Payable) {
+            //应付账户
+            if (model.getTxType() == TxTypeEnum.Income) {
+                model.setDrAmount(model.getTxAmount());
+            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+                model.setCrAmount(model.getTxAmount());
+            }
+        } else {
+            if (model.getTxType() == TxTypeEnum.Income) {
+                model.setDrAmount(model.getTxAmount());
+            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+                model.setCrAmount(model.getTxAmount());
+            }
+        }
+        dailybillRepository.insertSelective(model);
+
+        log.info("创建 {}, id={}", JSON.toJSONString(vo), model.getId());
+        return prepareResp(model);
     }
 
 

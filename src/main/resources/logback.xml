@@ -10,6 +10,7 @@
 
     <!-- 日志级别 DEBUG>INFO>WARN>ERROR DEBUG 一般是开发用. 生产环境一般是INFO-->
     <!-- 将org.springstudy.repository 打印为 debug-->
+    <logger name="org.springframework" level="WARN"/>
     <logger name="org.springstudy.repository" level="DEBUG"/>
 
     <root level="INFO">

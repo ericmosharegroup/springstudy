@@ -3,27 +3,23 @@ package org.springstudy.webapp.vo;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springstudy.enums.TxTypeEnum;
 
 import javax.validation.constraints.NotNull;
 
 @Data
 public class DailybillVO {
 
-    private String tx_year;
+    private String userId;
 
-    private String tx_month;
+    private String txDate;
 
-    private String tx_date;
+    private String txAmount;
 
-    private Long dr_amount;
+    private Long accountId;
 
-    private Long cr_amount;
-
-    private Long account_id;
-
-    private String tx_type;
+    private String txType;
 
     private String remark;
 
-    private String userId;
 }

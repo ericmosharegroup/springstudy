@@ -52,13 +52,14 @@ DROP TABLE IF EXISTS `daily_bill`;
 CREATE TABLE `daily_bill` (
     `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `user_id` varchar(64) NOT NULL DEFAULT '' COMMENT '用户id',
-    `tx_year` varchar(4) NOT NULL DEFAULT '' COMMENT '交易年,如2019',
-    `tx_month` varchar(6) NOT NULL DEFAULT '' COMMENT '交易月份,如201901',
     `tx_date` varchar(8) NOT NULL DEFAULT '' COMMENT '交易日期,如20190125',
+    `tx_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易金额',
     `dr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '借方金额',
     `cr_amount` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '贷方金额',
     `account_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '账户id',
     `tx_type` varchar(10) NOT NULL DEFAULT '0' COMMENT '交易类型,支出-0,收入-1,转账-2',
     `remark` varchar(64) NOT NULL DEFAULT '' COMMENT '备注',
+    `create_time` TIMESTAMP NOT NULL DEFAULT '2010-09-10 10:30:50'  COMMENT '创建时间',
+    `update_time` TIMESTAMP NOT NULL DEFAULT '2010-09-10 10:30:50' ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8 COMMENT '交易明细表, 记录每一笔支出/收入交易';

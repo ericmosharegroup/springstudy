@@ -1,18 +1,21 @@
 //将form转为AJAX提交
 function ajaxSubmit(form, callback) {
     var dataPara = transferFormToJson(form);
+
+    console.log("dataPara:" + dataPara);
+
     $.ajax({
         url: form.action, //路径, 比如/user/create
         type: form.method,
         data: dataPara,
         success: function (data, status) {
             //成功
-            console.info("call success:" + data.code);
+            console.info("call success:\n" + data.code);
             callback(data, status);
         },
         error: function (data, status) {
             //失败
-            console.error("call fail:" + data.code);
+            console.error("call fail:\n" + data.code);
             callback(data, status);
         }
     });
