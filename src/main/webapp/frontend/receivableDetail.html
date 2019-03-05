@@ -39,6 +39,9 @@
                     document.getElementById("accountRemark").innerText = data.data.remark;
                     document.getElementById("accountBalance").innerText = change(data.data.balance);
 
+                    document.getElementById("accountId").innerText = data.data.id;
+                    document.getElementById("userId").innerText = data.data.userId;
+
                 },
                 error: function (data, status) {
                     //失败
@@ -85,17 +88,33 @@ ul:unorganized list
                         <div class="col-sm-6" id="accountBalance">
                             0.00
                         </div>
+
+                        <input type="hidden" id="userId" value="">
+                        <input type="hidden" id="accountId" value="">
                     </div>
                 </div>
             </div>
         </div>
     </form>
 
+    <p>
+        <button type="button" class="btn btn-primary btn-lg" onclick="submitByClick()">记一笔</button>
+    </p>
+
 
 </div>
 
-<script>
+<script type="text/javascript">
 
+
+    function submitByClick() {
+
+        var accountId = document.getElementById("accountId").innerText;
+        var accountName = document.getElementById("accountName").innerText;
+        var userId = document.getElementById("userId").innerText;
+
+        window.location.href = 'detail.html?userId=' + userId + '&id=' + accountId + '&accountName=' + accountName;
+    }
 </script>
 </body>
 </html>

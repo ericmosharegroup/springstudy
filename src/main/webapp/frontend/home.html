@@ -36,8 +36,16 @@ ul:unorganized list
 
     $(document).ready(function () {
 
+        var url = window.location.search;
+        var userId = getFormValue(url, 'userId');
+
+        if (userId == null) {
+            userId = '10086';
+        }
+
+
         $.ajax({
-            url: "/account/queryAllAssets/10086", //路径, 比如/user/create
+            url: "/account/queryAllAssets/" + userId, //路径, 比如/user/create
             type: "post",
             data: null,
             success: function (data, status) {
@@ -197,7 +205,7 @@ ul:unorganized list
                             //如果是储蓄卡和无卡,比如现金钱包
                             redirect = "/frontend/fundDebitDetail.html";
                         }
-                    } else if (arr[index].accountType == 'Receivable'){
+                    } else if (arr[index].accountType == 'Receivable') {
                         //如果是应收账户
                         redirect = "/frontend/receivableDetail.html";
 

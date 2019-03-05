@@ -66,7 +66,7 @@
     </bean>
 
 
-    <mvc:view-controller path="/" view-name="redirect:/frontend/index.html"/>
+    <mvc:view-controller path="/" view-name="redirect:/frontend/home.html"/>
 
     <mvc:resources mapping="/frontend/**" location="/frontend/"/>
 

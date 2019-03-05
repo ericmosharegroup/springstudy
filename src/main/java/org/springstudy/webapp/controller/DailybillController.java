@@ -36,9 +36,7 @@ public class DailybillController extends AbstractController {
     private AccountRepository accountRepository;
 
     /**
-     * 创建账户,form表单提交
-     * Integer 是 int 包装类. Integer = int
-     * Long 是 long 的包装类
+     * 创建账单,form表单提交
      *
      * @return 用户 id
      */
@@ -88,6 +86,8 @@ public class DailybillController extends AbstractController {
         log.info("创建 {}, id={}", JSON.toJSONString(vo), model.getId());
         return prepareResp(model);
     }
+
+
 
 
 }
