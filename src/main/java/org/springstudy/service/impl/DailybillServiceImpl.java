@@ -14,8 +14,6 @@ import org.springstudy.service.DailybillService;
 import org.springstudy.utils.MoneyUtils;
 import org.springstudy.webapp.vo.DailybillVO;
 
-import javax.xml.ws.ServiceMode;
-
 /**
  * Created by sheng on 2019/3/5.
  */
@@ -23,16 +21,15 @@ import javax.xml.ws.ServiceMode;
 @Service
 public class DailybillServiceImpl implements DailybillService {
 
-
     @Autowired
     private DailybillRepository dailybillRepository;
 
     @Autowired
     private AccountRepository accountRepository;
 
-
     @Override
     public Dailybill addBill(DailybillVO vo) {
+        log.info("收到创建流水请求, " + vo);
         String txDate = vo.getTxDate();
         txDate = txDate.replaceAll("-", "");
 

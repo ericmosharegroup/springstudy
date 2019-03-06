@@ -114,68 +114,93 @@ ul:unorganized list
 
     <p>资产账户</p>
 
-
     <div id="zhanghu">
+        <br>
         <div class="row">
             <div class="col-sm-12">
-                <div class="col-sm-6">
-                    <div class="btn-group">
-                        <button type="button" class="btn dropdown-toggle btn-lg"
-                                data-toggle="dropdown" onclick="queryAccountByUserId(10086,0,'fundAccounts')">
-                            <span class="caret"></span>资金账户&nbsp;<span id="fundCount">0</span>&nbsp;
-                        </button>
-                        <ul class="dropdown-menu" role="menu" id="fundAccounts">
-                        </ul>
-                    </div>
-                </div>
+                <button type="button" class="btn dropdown-toggle btn-default btn-block"
+                        data-toggle="dropdown" onclick="queryAccountByUserId(10086,0,'fundAccounts')">
 
-                <div class="col-sm-4 text-right">
-                    <span id="fundBalance" class="text-right">0</span>
-                </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="text-left">
+                                <span class="caret"></span>资金账户&nbsp;<span id="fundCount">0</span>&nbsp;
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="text-right">
+                                <span id="fundBalance">0</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </button>
+                <ul class="dropdown-menu" role="menu" id="fundAccounts" style="width: 100%; ">
+                </ul>
 
             </div>
         </div>
 
+        <br>
         <div class="row">
             <div class="col-sm-12">
-                <div class="col-sm-6">
-                    <div class="btn-group">
-                        <button type="button" class="btn dropdown-toggle btn-lg"
-                                data-toggle="dropdown" onclick="queryAccountByUserId(10086,1,'receivableAccounts')">
-                            <span class="caret"></span>应收账户&nbsp;<span id="receivableCount">0</span>&nbsp;
+                <button type="button" class="btn dropdown-toggle btn-default btn-lg btn-block"
+                        data-toggle="dropdown" onclick="queryAccountByUserId(10086,1,'receivableAccounts')">
 
-                        </button>
-                        <ul class="dropdown-menu" role="menu" id="receivableAccounts">
-                        </ul>
+
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="text-left">
+                                <span class="caret"></span>应收账户&nbsp;<span id="receivableCount">0</span>&nbsp;
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="text-right">
+                                <span id="receivableBalance" class="text-right">0</span>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="col-sm-4 text-right">
-                    <span id="receivableBalance" class="text-right">0</span>
-                </div>
+                </button>
+                <ul class="dropdown-menu" role="menu" id="receivableAccounts">
+                </ul>
             </div>
+
         </div>
 
-
+        <br>
         <div class="row">
             <div class="col-sm-12">
-                <div class="col-sm-6">
-                    <div class="btn-group">
-                        <button type="button" class="btn dropdown-toggle btn-lg"
-                                data-toggle="dropdown" onclick="queryAccountByUserId(10086,2,'payableAccounts')">
-                            <span class="caret"></span>应付账户&nbsp;<span id="payableCount">0</span>&nbsp;
+                <button type="button" class="btn dropdown-toggle btn-default btn-lg btn-block"
+                        data-toggle="dropdown" onclick="queryAccountByUserId(10086,2,'payableAccounts')">
 
-                        </button>
-                        <ul class="dropdown-menu" role="menu" id="payableAccounts">
-                        </ul>
+
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="text-left">
+                                <span class="caret"></span>应付账户&nbsp;<span id="payableCount">0</span>&nbsp;
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="text-right">
+                                <span id="payableBalance" class="text-right">0</span>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="col-sm-4 text-right">
-                    <span id="payableBalance" class="text-right">0</span>
-                </div>
 
+                </button>
+                <ul class="dropdown-menu" role="menu" id="payableAccounts">
+                </ul>
             </div>
+
         </div>
     </div>
 </div>
@@ -225,7 +250,7 @@ ul:unorganized list
                         redirect = "/frontend/payableDetail.html";
 
                     }
-                    var str = "<li><a href=\"" + redirect + "?userId={0}&id={1}\"> {2}     {3}     {4} </a></li><li class=\"divider\"></li>"
+                    var str = "<li><a href=\"" + redirect + "?userId={0}&id={1}\"><div class=\"row\"> <div class=\"col-sm-12\"> <div class=\"col-sm-8\"> <div class=\"text-left\"> {2}&nbsp;{3} </div> </div> <div class=\"col-sm-4\"> <div class=\"text-right\"> {4} </div> </div> </div> </div></a></li><li class=\"divider\"></li>"
                             .format(arr[index].userId, arr[index].id, arr[index].accountName, arr[index].remark, balance);
                     document.getElementById("" + accountTabName).innerHTML += str;
                 }

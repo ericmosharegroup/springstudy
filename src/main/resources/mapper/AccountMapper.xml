@@ -107,7 +107,7 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="org.springstudy.entity.Account">
+    <insert id="insert" parameterType="org.springstudy.entity.Account" useGeneratedKeys="true" keyProperty="id">
         insert into account (id, user_id, dr_amount,
         cr_amount, balance, account_name,
         account_type, card_type, remark,
@@ -117,7 +117,7 @@
         #{accountType,jdbcType=VARCHAR}, #{cardType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="org.springstudy.entity.Account">
+    <insert id="insertSelective" parameterType="org.springstudy.entity.Account" useGeneratedKeys="true" keyProperty="id">
         insert into account
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
