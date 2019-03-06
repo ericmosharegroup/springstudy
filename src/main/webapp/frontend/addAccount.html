@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>添加资产</title>
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/colorjson.css"/>
+    <script type="text/javascript" src="static/script/colorjson.js"></script>
+    <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+                var url = window.location.search;
+                var userId = getFormValue(url, 'userId');
+
+                if (userId == null) {
+                    userId = '10086';
+                }
+
+                document.getElementById("userId").innerText = userId;
+            }
+        )
+    </script>
+
+</head>
+<body>
+
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">添加资产</li>
+</ol>
+
+
+<div class="container">
+    <form id="myForm" class="form-horizontal" role="form" action="/account/create" method="post"
+          style="margin-top:-20px">
+
+        <input type="hidden" id="userId" name="userId" value=""/>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户名称</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="accountName" value="现金钱包"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>余额</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="balance" value="0"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="remark" value="" placeholder="非必填"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户类型</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="accountType">
+                    <option value="Fund" selected>资金账户</option>
+                    <option value="Receivable">应收账户</option>
+                    <option value="Payable">应付账户</option>
+                    <option value="">空</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户类型</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="cardType">
+                    <option value="OTHERS" selected>其他</option>
+                    <option value="DEBIT">借记卡</option>
+                    <option value="CREDIT">信用卡</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info" onclick="submitByClick()">提交</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<script type="text/javascript">
+
+    /**
+     * 提交form 表单, 由按钮触发
+     */
+    function submitByClick() {
+
+        var url = window.location.search;
+        var userId = getFormValue(url, 'userId');
+        var redirect = getFormValue(url, 'redirect');
+
+        console.log("_______1_______");
+
+        $('#myForm').bind('submit', function () {
+            console.log("_______2_______");
+
+            ajaxSubmit(this, function (data, status) {
+                //callback 函数
+                console.log("return status:" + status + ", data:" + JSON.stringify(data));
+
+            });
+
+            return false;
+
+        });
+
+        console.log("redirect to:" + redirect);
+
+        if (redirect == null || redirect == '') {
+            redirect = 'home.html';
+        }
+        // window.location.href = redirect + '?userId=' + userId;
+
+
+    }
+
+</script>
+</body>
+</html>

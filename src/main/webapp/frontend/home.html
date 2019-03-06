@@ -101,6 +101,17 @@ ul:unorganized list
         </div>
     </form>
 
+    <div class="row">
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block">记一笔</button>
+        </div>
+
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addAccount()">添加资产</button>
+        </div>
+
+    </div>
+
     <p>资产账户</p>
 
 
@@ -230,6 +241,17 @@ ul:unorganized list
         });
     }
 
+    function addAccount() {
+        var url = window.location.search;
+        var userId = getFormValue(url, 'userId');
+
+        if (userId == null) {
+            userId = '10086';
+        }
+
+        window.location.href = 'addAccount.html?userId=' + userId + '&redirect=/frontend/home.html';
+
+    }
 
 </script>
 </body>
