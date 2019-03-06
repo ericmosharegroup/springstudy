@@ -15,4 +15,13 @@ public interface DailybillService {
      * @return 结果
      */
     Dailybill addBill(DailybillVO vo);
+
+
+    /**
+     * 重新计算账户借,贷余额
+     *
+     * @param userId
+     * @param accountId
+     */
+    void recalculateAccountDcAmount(String userId, Long accountId);
 }

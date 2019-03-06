@@ -12,6 +12,7 @@ import org.springstudy.repository.AccountRepository;
 import org.springstudy.service.AccountService;
 import org.springstudy.service.DailybillService;
 import org.springstudy.utils.DateUtils;
+import org.springstudy.utils.MoneyUtils;
 import org.springstudy.webapp.vo.AccountVO;
 import org.springstudy.webapp.vo.DailybillVO;
 
@@ -70,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
         bill.setTxDate(DateUtils.getCurrentDate());
         bill.setTxType(TxTypeEnum.Income.name());
         bill.setRemark("余额调整");
-        bill.setTxAmount(String.valueOf(vo.getBalance()));
+        bill.setTxAmount(MoneyUtils.fenToYuan(vo.getBalance()));
 
         dailybillService.addBill(bill);
 

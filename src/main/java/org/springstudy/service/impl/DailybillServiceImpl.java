@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springstudy.entity.Account;
-import org.springstudy.entity.Dailybill;
+import org.springstudy.entity.*;
 import org.springstudy.enums.AccountTypeEnum;
 import org.springstudy.enums.TxTypeEnum;
 import org.springstudy.repository.AccountRepository;
@@ -71,6 +70,33 @@ public class DailybillServiceImpl implements DailybillService {
 
         log.info("创建 {}, id={}", JSON.toJSONString(vo), model.getId());
 
+
+        //重新计算该账户的余额
+        recalculateAccountDcAmount(vo.getUserId(), vo.getAccountId());
+
         return model;
+    }
+
+    @Override
+    public void recalculateAccountDcAmount(String userId, Long accountId) {
+
+        log.info("重新计算该账户的余额, {}:{}", userId, accountId);
+        DailybillExample example = new DailybillExample();
+        example.createCriteria().andUserIdEqualTo(userId)
+                .andAccountIdEqualTo(accountId);
+
+        DcAmount result = dailybillRepository.sumByExample(example);
+
+        Account model = new Account();
+        model.setDrAmount(result.getDrAmount());
+        model.setCrAmount(result.getCrAmount());
+        model.setBalance(result.getDrAmount() - result.getCrAmount());
+
+        AccountExample accountExample = new AccountExample();
+        accountExample.createCriteria().andUserIdEqualTo(userId)
+                .andIdEqualTo(accountId);
+        accountRepository.updateByExampleSelective(model, accountExample);
+
+
     }
 }

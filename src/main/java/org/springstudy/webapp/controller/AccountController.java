@@ -145,7 +145,7 @@ public class AccountController extends AbstractController {
         map.put("payableCount", String.valueOf(payableCount));
         map.put("payableBalance", MoneyUtils.fenToYuan(payableDrAmount - payableCrAmount));
 
-        log.info("{} 的资产为:{}", userId, JSON.toJSONString(map, true));
+        log.debug("//   {} 的资产为:{}", userId, JSON.toJSONString(map));
         return prepareResp(map);
     }
 

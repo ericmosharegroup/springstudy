@@ -25,7 +25,6 @@ public class BillTest extends BaseNGTest {
     @Autowired
     private MonthbillRepository monthbillRepository;
 
-
     @Test
     public void testInsert() {
 

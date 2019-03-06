@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springstudy.entity.User;
-import org.springstudy.entity.UserExample;
+import org.springstudy.entity.*;
 import org.springstudy.ericmoshare.BaseNGTest;
+import org.springstudy.repository.DailybillRepository;
 import org.springstudy.repository.UserRepository;
 import org.testng.annotations.Test;
 
@@ -26,6 +26,9 @@ public class DbTest extends BaseNGTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DailybillRepository dailybillRepository;
 
     @Test
     public void testPrint() {
@@ -51,7 +54,7 @@ public class DbTest extends BaseNGTest {
 
         userRepository.insertSelective(user);
 
-        System.out.println("id:"+ user.getId());
+        System.out.println("id:" + user.getId());
 
     }
 
@@ -60,12 +63,24 @@ public class DbTest extends BaseNGTest {
 
         UserExample example = new UserExample();
         example.createCriteria().andIdGreaterThan(1L)
-        .andIdLessThan(10L);
+                .andIdLessThan(10L);
 
         List<User> result = userRepository.selectByExample(example);
 
         System.out.println(result);
 
-        log.info("result=\n"+ JSON.toJSONString(result,true));
+        log.info("result=\n" + JSON.toJSONString(result, true));
+    }
+
+    @Test
+    public void testSelect2() {
+
+        DailybillExample example = new DailybillExample();
+
+        DcAmount result = dailybillRepository.sumByExample(example);
+
+        System.out.println(result);
+
+        log.info("result=\n" + JSON.toJSONString(result, true));
     }
 }
