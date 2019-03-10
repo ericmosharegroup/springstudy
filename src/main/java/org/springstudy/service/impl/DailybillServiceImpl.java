@@ -29,52 +29,60 @@ public class DailybillServiceImpl implements DailybillService {
     @Override
     public Dailybill addBill(DailybillVO vo) {
         log.info("收到创建流水请求, " + vo);
-        String txDate = vo.getTxDate();
-        txDate = txDate.replaceAll("-", "");
 
-        Dailybill model = new Dailybill();
-        model.setUserId(vo.getUserId());
-        model.setTxDate(txDate);
-        model.setTxType(TxTypeEnum.valueOf(vo.getTxType()));
-        model.setRemark(vo.getRemark());
-        model.setAccountId(vo.getAccountId());
-        model.setTxAmount(MoneyUtils.yuanToFen(vo.getTxAmount()));
+        try {
+            String txDate = vo.getTxDate();
+            txDate = txDate.replaceAll("-", "");
 
-        //拿到账户id
-        Account account = accountRepository.selectByPrimaryKey(vo.getAccountId());
+            Dailybill model = new Dailybill();
+            model.setUserId(vo.getUserId());
+            model.setTxDate(txDate);
+            model.setTxType(TxTypeEnum.valueOf(vo.getTxType()));
+            model.setRemark(vo.getRemark());
+            model.setAccountId(vo.getAccountId());
+            model.setTxAmount(MoneyUtils.yuanToFen(vo.getTxAmount()));
 
-        AccountTypeEnum accountType = account.getAccountType();
-        if (accountType == AccountTypeEnum.Fund) {
-            //资金账户
-            //借记卡, 信用卡
-            if (model.getTxType() == TxTypeEnum.Income) {
-                model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expend) {
-                model.setCrAmount(model.getTxAmount());
+            //拿到账户id
+            Account account = accountRepository.selectByPrimaryKey(vo.getAccountId());
+
+            AccountTypeEnum accountType = account.getAccountType();
+            if (accountType == AccountTypeEnum.Fund) {
+                //资金账户
+                //借记卡, 信用卡
+                if (model.getTxType() == TxTypeEnum.Income) {
+                    model.setDrAmount(model.getTxAmount());
+                } else if (model.getTxType() == TxTypeEnum.Expend) {
+                    model.setCrAmount(model.getTxAmount());
+                }
+            } else if (accountType == AccountTypeEnum.Payable) {
+                //应付账户
+                if (model.getTxType() == TxTypeEnum.Income) {
+                    model.setDrAmount(model.getTxAmount());
+                } else if (model.getTxType() == TxTypeEnum.Expend) {
+                    model.setCrAmount(model.getTxAmount());
+                }
+            } else {
+                if (model.getTxType() == TxTypeEnum.Income) {
+                    model.setDrAmount(model.getTxAmount());
+                } else if (model.getTxType() == TxTypeEnum.Expend) {
+                    model.setCrAmount(model.getTxAmount());
+                }
             }
-        } else if (accountType == AccountTypeEnum.Payable) {
-            //应付账户
-            if (model.getTxType() == TxTypeEnum.Income) {
-                model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expend) {
-                model.setCrAmount(model.getTxAmount());
-            }
-        } else {
-            if (model.getTxType() == TxTypeEnum.Income) {
-                model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expend) {
-                model.setCrAmount(model.getTxAmount());
-            }
+            dailybillRepository.insertSelective(model);
+
+            log.info("创建 {}, id={}", JSON.toJSONString(vo), model.getId());
+
+
+            //重新计算该账户的余额
+            recalculateAccountDcAmount(vo.getUserId(), vo.getAccountId());
+            return model;
+
+        } catch (Exception e) {
+            log.error("catch Exception, " + e.getMessage(), e);
+            throw e;
         }
-        dailybillRepository.insertSelective(model);
-
-        log.info("创建 {}, id={}", JSON.toJSONString(vo), model.getId());
 
 
-        //重新计算该账户的余额
-        recalculateAccountDcAmount(vo.getUserId(), vo.getAccountId());
-
-        return model;
     }
 
     @Override
