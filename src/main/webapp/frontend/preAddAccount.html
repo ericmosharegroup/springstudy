@@ -73,6 +73,14 @@ ul:unorganized list
                             </button>
                         </div>
 
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block" onclick="addCashCard()">
+                                <div class="text-left">
+                                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;现金钱包
+                                </div>
+                            </button>
+                        </div>
+
                     </div>
 
                 </form>
@@ -83,10 +91,36 @@ ul:unorganized list
         </div>
 
         <div class="tab-pane fade" id="receivable">
-            <p>应收</p>
+            <div class="container">
+                <form id="receivableForm" class="form-horizontal" role="form" action="add" method="post">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block" onclick="addReceivable()">
+                                <div class="text-left">
+                                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;借出
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+
         <div class="tab-pane fade" id="payable">
-            <p>应付</p>
+            <div class="container">
+                <form id="payableForm" class="form-horizontal" role="form" action="add" method="post">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block" onclick="addPayable()">
+                                <div class="text-left">
+                                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;借入
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         </div>
     </div>
 </div>
@@ -116,6 +150,45 @@ ul:unorganized list
         var userId = getFormValue(url, 'userId');
 
         var redirect = "addCreditCard.html";
+        window.location.href = redirect + '?userId=' + userId;
+
+    }
+
+    //添加现金钱包
+    function addCashCard() {
+
+        var url = window.location.search;
+        console.log("url:" + url);
+
+        var userId = getFormValue(url, 'userId');
+
+        var redirect = "addCashCard.html";
+        window.location.href = redirect + '?userId=' + userId;
+
+    }
+
+    //添加应收
+    function addReceivable() {
+
+        var url = window.location.search;
+        console.log("url:" + url);
+
+        var userId = getFormValue(url, 'userId');
+
+        var redirect = "addReceivable.html";
+        window.location.href = redirect + '?userId=' + userId;
+
+    }
+
+    //添加应付
+    function addPayable() {
+
+        var url = window.location.search;
+        console.log("url:" + url);
+
+        var userId = getFormValue(url, 'userId');
+
+        var redirect = "addPayable.html";
         window.location.href = redirect + '?userId=' + userId;
 
     }
