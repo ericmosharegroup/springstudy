@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加资产</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="static/script/jquery.min.js"></script>
+    <script src="static/script/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/colorjson.css"/>
+    <script type="text/javascript" src="static/script/colorjson.js"></script>
+    <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
+
+    <script>
+        var url = window.location.search;
+        //url=?userId=10086&id=2&accountName=招商银行
+        console.log("url=" + url);
+
+
+    </script>
+</head>
+<body>
+
+<!-- ol:organized list
+ul:unorganized list
+-->
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">添加资产</li>
+</ol>
+
+
+<div class="container">
+    <ul id="myTab" class="nav nav-pills nav-justified">
+        <li class="active">
+            <a href="#fund" data-toggle="tab" style="font-size: 32px;">资金</a>
+        </li>
+        <li>
+            <a href="#investment" data-toggle="tab" style="font-size: 32px;">投资</a>
+        </li>
+        <li>
+            <a href="#receivable" data-toggle="tab" style="font-size: 32px;">应收</a>
+        </li>
+        <li>
+            <a href="#payable" data-toggle="tab" style="font-size: 32px;">应付</a>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="fund">
+
+            <div class="container">
+
+                <form id="fundForm" class="form-horizontal" role="form" action="add" method="post">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block" onclick="addCreditCard()">
+                                <div class="text-left">
+                                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;信用卡
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block" onclick="addDebitCard()">
+                                <div class="text-left">
+                                    <span class="glyphicon glyphicon-credit-card"></span>&nbsp;借记卡
+                                </div>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="investment">
+            <p>投资</p>
+        </div>
+
+        <div class="tab-pane fade" id="receivable">
+            <p>应收</p>
+        </div>
+        <div class="tab-pane fade" id="payable">
+            <p>应付</p>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    //添加借记卡
+    function addDebitCard() {
+
+        var url = window.location.search;
+        console.log("url:" + url);
+
+        var userId = getFormValue(url, 'userId');
+
+        var redirect = "addDebitCard.html";
+        window.location.href = redirect + '?userId=' + userId;
+
+    }
+
+    //添加信用卡
+    function addCreditCard() {
+
+        var url = window.location.search;
+        console.log("url:" + url);
+
+        var userId = getFormValue(url, 'userId');
+
+        var redirect = "addCreditCard.html";
+        window.location.href = redirect + '?userId=' + userId;
+
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 function ajaxSubmit(form, callback) {
     var dataPara = transferFormToJson(form);
 
-    console.log("dataPara:" + dataPara);
+    console.log("dataPara:" + JSON.stringify(dataPara));
 
     $.ajax({
         url: form.action, //路径, 比如/user/create
@@ -16,6 +16,7 @@ function ajaxSubmit(form, callback) {
         error: function (data, status) {
             //失败
             console.error("call fail:\n" + data.code);
+            alert("call " + form.action + "catch error, data:" + data + ",status:" + status);
             callback(data, status);
         }
     });
@@ -56,4 +57,3 @@ function sendAjax(url, data, callback) {
         }
     });
 }
-

@@ -22,7 +22,25 @@ public enum CardTypeEnum {
     /**
      * 贷记卡
      */
-    CREDIT(2, "信用卡");
+    CREDIT(2, "信用卡"),
+
+    /**
+     * 现金钱包
+     */
+    CASH(3, "现金钱包"),
+
+    /**
+     * 借入
+     */
+    JIE_RU(4, "借入"),
+
+    /**
+     * 借出
+     */
+    JIE_CHU(5, "借出"),
+
+    //
+    ;
 
     @Getter
     private final Integer code;

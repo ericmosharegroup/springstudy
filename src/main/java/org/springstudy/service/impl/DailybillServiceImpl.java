@@ -49,20 +49,20 @@ public class DailybillServiceImpl implements DailybillService {
             //借记卡, 信用卡
             if (model.getTxType() == TxTypeEnum.Income) {
                 model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+            } else if (model.getTxType() == TxTypeEnum.Expend) {
                 model.setCrAmount(model.getTxAmount());
             }
         } else if (accountType == AccountTypeEnum.Payable) {
             //应付账户
             if (model.getTxType() == TxTypeEnum.Income) {
                 model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+            } else if (model.getTxType() == TxTypeEnum.Expend) {
                 model.setCrAmount(model.getTxAmount());
             }
         } else {
             if (model.getTxType() == TxTypeEnum.Income) {
                 model.setDrAmount(model.getTxAmount());
-            } else if (model.getTxType() == TxTypeEnum.Expenditure) {
+            } else if (model.getTxType() == TxTypeEnum.Expend) {
                 model.setCrAmount(model.getTxAmount());
             }
         }

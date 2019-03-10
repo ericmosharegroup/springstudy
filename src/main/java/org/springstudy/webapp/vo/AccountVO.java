@@ -9,24 +9,27 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AccountVO {
 
-    @NotEmpty(message = "accountName:必须输入")
-    @Length(min = 1, max = 30, message = "accountName:长度应在{max}位之内")
+    //@NotEmpty(message = "accountName:必须输入")
+   // @Length(min = 1, max = 30, message = "accountName:长度应在{max}位之内")
     private String accountName;
 
-    @NotNull(message = "balance:必须输入")
-    private Long balance;
+    //@NotNull(message = "drAmount:必须输入")
+    private Long drAmount;
 
-    @NotEmpty(message = "accountType:必须输入")
-    @Length(min = 1, max = 12, message = "accountType:长度应在{max}位之内")
+    //@NotNull(message = "crAmount:必须输入")
+    private Long crAmount;
+
+    //@NotEmpty(message = "accountType:必须输入")
+    //@Length(min = 1, max = 12, message = "accountType:长度应在{max}位之内")
     private String accountType;
 
     private String remark;
 
-    @NotEmpty(message = "cardType:必须输入")
-    @Length(min = 1, max = 12, message = "cardType:长度应在{max}位之内")
+    //@NotEmpty(message = "cardType:必须输入")
+    //@Length(min = 1, max = 12, message = "cardType:长度应在{max}位之内")
     private String cardType;
 
-    @NotEmpty(message = "userId:必须输入")
-    @Length(min = 1, max = 12, message = "userId:长度应在{max}位之内")
+    //@NotEmpty(message = "userId:必须输入")
+    //@Length(min = 1, max = 12, message = "userId:长度应在{max}位之内")
     private String userId;
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>新建账户</title>
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+
+    <script src="static/script/jquery.min.js"></script>
+    <script src="static/script/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="static/css/colorjson.css"/>
+    <script type="text/javascript" src="static/script/colorjson.js"></script>
+    <script type="text/javascript" src="static/script/myAjax.js"></script>
+    <script type="text/javascript" src="static/script/sys.js"></script>
+
+    <script>
+
+    </script>
+
+</head>
+<body>
+
+<ol class="breadcrumb">
+    <li><a href="/">支付模拟器</a></li>
+    <li><a href="/">Home</a></li>
+    <li class="active">新建账户</li>
+</ol>
+
+
+<div class="container">
+    <form id="myForm2" class="form-horizontal" role="form" action="/account/create" method="post"
+          style="margin-top:-20px">
+
+        <input type="hidden" id="userId" name="userId" value=""/>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><font color="red">*</font>账户名称</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="accountName" name="accountName" value="招商银行"/>
+            </div>
+            <span>借记卡</span>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">备注信息</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="remark" value="" placeholder="如工资卡(可不填)"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">银行卡号</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="cardNo" name="cardNo" value="" placeholder="卡号(可不填)"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">卡内余额(分)</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="drAmount" value="0"/>
+            </div>
+        </div>
+
+        <input type="hidden" id="accountType" name="accountType" value="Fund">
+        <input type="hidden" id="cardType" name="cardType" value="DEBIT">
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info" onclick="submitByClick()">提交</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<script type="text/javascript">
+
+    /**
+     * 提交form 表单, 由按钮触发
+     */
+    function submitByClick() {
+
+        var url = window.location.search;
+        var userId = getFormValue(url, 'userId');
+
+        console.log("---1");
+
+        $('#myForm2').bind('submit', function () {
+
+            var accountName = document.getElementById("accountName").value;
+            var cardNo = document.getElementById("cardNo").value;
+
+            document.getElementById("accountName").value = accountName + cardNo;
+            document.getElementById("userId").value = userId;
+
+            console.log("---2:" + document.getElementById("accountName").value);
+
+            ajaxSubmit(this, function (data, status) {
+                //callback 函数
+                console.log("return status:" + status + ", data:" + JSON.stringify(data));
+
+            });
+
+            return false;
+        });
+
+        window.location.href = 'home.html?userId=' + userId;
+    }
+
+</script>
+</body>
+</html>

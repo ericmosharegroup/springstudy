@@ -10,7 +10,7 @@ public enum TxTypeEnum {
     /**
      * 支出
      */
-    Expenditure(0, "支出"),
+    Expend(0, "支出"),
 
     /**
      * 收入
