@@ -15,10 +15,7 @@ import org.springstudy.enums.CardTypeEnum;
 import org.springstudy.repository.AccountRepository;
 import org.springstudy.service.AccountService;
 import org.springstudy.utils.MoneyUtils;
-import org.springstudy.webapp.vo.AccountDetailQueryVO;
-import org.springstudy.webapp.vo.AccountQueryVO;
-import org.springstudy.webapp.vo.AccountVO;
-import org.springstudy.webapp.vo.Resp;
+import org.springstudy.webapp.vo.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -164,6 +161,27 @@ public class AccountController extends AbstractController {
         example.createCriteria()
                 .andUserIdEqualTo(vo.getUserId())
                 .andAccountTypeEqualTo(vo.getAccountType());
+
+        List<Account> list = accountRepository.selectByExample(example);
+
+        log.info("{} 的资产查询成功", vo.getUserId());
+        return prepareResp(list);
+    }
+
+    /**
+     * 根据账户类型查询所有账户名,form表单提交
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/account/queryAccountName", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> queryAccountName(@ModelAttribute @Valid AccountNameQueryVO vo) {
+        log.info("查询账户: " + vo);
+
+        AccountExample example = new AccountExample();
+        example.createCriteria()
+                .andUserIdEqualTo(vo.getUserId());
 
         List<Account> list = accountRepository.selectByExample(example);
 

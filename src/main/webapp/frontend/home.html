@@ -67,6 +67,7 @@ ul:unorganized list
                 //应付账户
                 document.getElementById("payableCount").innerText = data.data.payableCount;
                 document.getElementById("payableBalance").innerText = data.data.payableBalance;
+
             },
             error: function (data, status) {
                 //失败
@@ -103,15 +104,16 @@ ul:unorganized list
 
     <div class="row">
         <div class="col-sm-6">
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addDailybill()">记一笔</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addDetail()">记一笔</button>
+
         </div>
 
         <div class="col-sm-6">
             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addAccount()">添加资产</button>
         </div>
-
     </div>
 
+    <hr>
     <p>资产账户</p>
 
     <div id="zhanghu">
@@ -253,6 +255,7 @@ ul:unorganized list
                     var str = "<li><a href=\"" + redirect + "?userId={0}&id={1}\"><div class=\"row\"> <div class=\"col-sm-12\"> <div class=\"col-sm-8\"> <div class=\"text-left\"> {2}&nbsp;{3} </div> </div> <div class=\"col-sm-4\"> <div class=\"text-right\"> {4} </div> </div> </div> </div></a></li><li class=\"divider\"></li>"
                             .format(arr[index].userId, arr[index].id, arr[index].accountName, arr[index].remark, balance);
                     document.getElementById("" + accountTabName).innerHTML += str;
+                    console.log("str=" + str);
                 }
                 //资金账户
 
@@ -278,12 +281,18 @@ ul:unorganized list
 
     }
 
-    function addDailybill() {
+    function addDetail() {
+        var url = window.location.search;
+        var userId = getFormValue(url, 'userId');
 
-        window.location.href = 'detail.html?userId=' +userId+'' +
-            ''
-        
+        if (userId == null) {
+            userId = '10086';
+        }
+
+        window.location.href = 'addBill.html?userId=' + userId + '&redirect=/frontend/home.html';
+
     }
+
 
 </script>
 </body>
