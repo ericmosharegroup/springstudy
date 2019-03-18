@@ -16,6 +16,8 @@ import org.springstudy.repository.AccountRepository;
 import org.springstudy.repository.DailybillRepository;
 import org.springstudy.service.DailybillService;
 import org.springstudy.utils.MoneyUtils;
+import org.springstudy.webapp.dto.PageableReqVO;
+import org.springstudy.webapp.dto.PageableRespDTO;
 import org.springstudy.webapp.vo.*;
 
 import javax.smartcardio.Card;
@@ -47,6 +49,22 @@ public class DailybillController extends AbstractController {
         Object result = dailybillService.addBill(vo);
 
         return prepareResp(result);
+    }
+
+
+    /**
+     * 创建账单,form表单提交
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/dailybill/queryByPage", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> queryByPage(@ModelAttribute @Valid PageableReqVO<DailybillVO> vo) {
+        log.info("创建账单: " + vo);
+
+        PageableRespDTO<DailybillVO> respVO = null;
+        respVO.setPageNumber(0);
+
+        return prepareResp(respVO);
     }
 
 
