@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Venus</title>
+    <title>记一笔</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
 
     <script src="static/script/jquery.min.js"></script>
@@ -20,7 +20,6 @@
         console.log("url=" + url);
 
         var userId = getFormValue(url, 'userId');
-
 
         $(document).ready(function () {
 
@@ -44,7 +43,7 @@
                     var arr = data.data;
 
                     for (var index in arr) {
-                        console.log(index + ", " + JSON.stringify(arr[index]));
+                        //console.log(index + ", " + JSON.stringify(arr[index]));
 
                         var accountId = arr[index].id;
                         var accountName = arr[index].accountName;
@@ -76,6 +75,7 @@
             });
         }
 
+        //表示选中操作
         function selected(userId, accountId, accountName, remark) {
 
             document.getElementById("accountName").innerText = accountName + remark;
@@ -255,7 +255,7 @@ ul:unorganized list
 
                     <input type="hidden" id="accountId2" name="accountId">
                     <input type="hidden" id="userId2" name="userId">
-                    <input type="hidden" name="txType" value="Expenditure">
+                    <input type="hidden" name="txType" value="Expend">
 
 
                     <div class="form-group">
