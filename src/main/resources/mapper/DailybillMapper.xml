@@ -260,4 +260,32 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
+
+    <select id="selectByPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from daily_bill
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+        <if test="pageable != null">
+            <if test="pageable.sort != null">
+                <if test="pageable.sort.orders != null">
+                    order by
+                    <foreach collection="pageable.sort.orders" item="order" separator=",">
+                        <if test="
+   order.property == 'id'
+   || order.property == 'create_time'
+   || order.property == 'update_time'
+        ">
+                            ${order.property} ${order.direction}
+                        </if>
+                    </foreach>
+                </if>
+            </if>
+            <if test="pageable.offset >= 0 and pageable.pageSize > 0">
+                limit ${pageable.offset}, ${pageable.pageSize}
+            </if>
+        </if>
+    </select>
 </mapper>
