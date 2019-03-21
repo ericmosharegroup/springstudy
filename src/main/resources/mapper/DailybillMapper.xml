@@ -20,6 +20,12 @@
         <result column="cr_amount" property="crAmount" jdbcType="BIGINT"/>
     </resultMap>
 
+    <resultMap id="monthlyResultMap" type="org.springstudy.entity.MonthlySummary">
+        <result column="tx_month" property="txMonth" jdbcType="VARCHAR"/>
+        <result column="dr_amount" property="drAmount" jdbcType="BIGINT"/>
+        <result column="cr_amount" property="crAmount" jdbcType="BIGINT"/>
+    </resultMap>
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -288,4 +294,29 @@
             </if>
         </if>
     </select>
+
+    <select id="selectMonthlyByPage" resultMap="monthlyResultMap">
+        select SUBSTR(tx_date,1,6) tx_month, sum(dr_amount) dr_amount, sum(cr_amount) cr_amount
+        from daily_bill
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+        group by tx_month
+        <if test="pageable != null">
+            order by tx_month desc
+            <if test="pageable.offset >= 0 and pageable.pageSize > 0">
+                limit ${pageable.offset}, ${pageable.pageSize}
+            </if>
+        </if>
+    </select>
+
+    <select id="countMonthlyByExample" parameterType="org.springstudy.entity.DailybillExample" resultType="java.lang.Integer">
+        select count(1) from( select SUBSTR(tx_date,1,6) tx_month, sum(dr_amount) dr_amount, sum(cr_amount) cr_amount
+        from daily_bill
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        group by tx_month) b
+    </select>
+
 </mapper>

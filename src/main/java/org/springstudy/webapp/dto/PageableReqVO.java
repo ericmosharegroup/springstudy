@@ -16,10 +16,7 @@ import java.util.ArrayList;
  * @author Jeff.Chen
  */
 @Data
-public class PageableReqVO<T> implements Serializable {
-
-    @Valid
-    T data;
+public class PageableReqVO implements Serializable {
 
     /**
      * 页码
@@ -37,16 +34,6 @@ public class PageableReqVO<T> implements Serializable {
     @Min(value = 1L, message = "pageSize必须大于等于{value}")
     private String pageSize;
 
-    /**
-     * 排序方式
-     */
-    @Pattern(regexp = "^(DESC|ASC)$", message = "排序方式填写错误")
-    private String direction;
-
-//    /**
-//     * 排序列
-//     */
-//    private String column;
 
     public Pageable getPageable() {
         Pageable pageable = new Pageable();
@@ -57,14 +44,10 @@ public class PageableReqVO<T> implements Serializable {
         order.setProperty("create_time");
         order.setDirection(Direction.DESC);
 
-        if (StringUtils.isNotEmpty(direction)) {
-            order.setDirection(Direction.valueOf(this.direction));
-        }
-
         Sort sort = new Sort();
 
         pageable.setSort(sort);
-        pageable.setOffset(0);
+        pageable.setOffset(pageable.getPageNumber() * pageable.getPageSize());
         return pageable;
     }
 

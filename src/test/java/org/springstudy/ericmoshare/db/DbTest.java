@@ -109,5 +109,33 @@ public class DbTest extends BaseNGTest {
         List<Dailybill> result = dailybillRepository.selectByPage(example, pageable);
 
         log.info("result=\n" + JSON.toJSONString(result, true));
+
+    }
+
+
+    @Test
+    public void selectMonthlyByPage() {
+
+        Pageable pageable = new Pageable();
+        pageable.setOffset(0);
+        pageable.setPageSize(5);
+
+        Order order = new Order();
+        order.setDirection(Direction.DESC);
+        order.setProperty("id");
+
+        Sort sort = new Sort();
+        sort.setOrders(Lists.newArrayList(order));
+        pageable.setSort(sort);
+
+        DailybillExample example = new DailybillExample();
+        example.createCriteria().andUserIdEqualTo("10086")
+                .andAccountIdEqualTo(2L);
+
+        List<MonthlySummary> list = dailybillRepository.selectMonthlyByPage(example, pageable);
+
+        log.info("result=\n" + JSON.toJSONString(list, true));
+
+
     }
 }

@@ -804,6 +804,8 @@ public class DailybillExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+
     }
 
     public static class Criteria extends GeneratedCriteria {
