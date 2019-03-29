@@ -124,4 +124,44 @@ public class DailybillController extends AbstractController {
         return (count / pageSize) + 1;
     }
 
+    /**
+     * 根据账户类型查询所有账户名,form表单提交
+     * Integer 是 int 包装类. Integer = int
+     * Long 是 long 的包装类
+     *
+     * @return 用户 id
+     */
+    @RequestMapping(value = "/account/queryBillByPage", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Resp> queryBillByPage(@ModelAttribute @Valid QueryEachMonthBillVO vo) {
+        log.info("查询每月账单:" + vo);
+
+
+        DailybillExample example = new DailybillExample();
+
+        example.createCriteria()
+                .andUserIdEqualTo(vo.getUserId())
+                .andAccountIdEqualTo(Long.valueOf(vo.getAccountId()))
+                .andTxDateGreaterThanOrEqualTo(vo.getTxMonth()+"01")
+                .andTxDateLessThanOrEqualTo(vo.getTxMonth()+"31");
+
+
+        Pageable pageable = vo.getPageable();
+        List<Dailybill> list = dailybillRepository.selectByPage(example, pageable);
+
+
+        PageableRespDTO<Dailybill> pageableRespDTO = new PageableRespDTO<>();
+        pageableRespDTO.setResults(list);
+
+        int count = dailybillRepository.countByExample(example);
+
+        //总数目
+        pageableRespDTO.setPageNumber(pageable.getPageNumber());
+        pageableRespDTO.setPageSize(pageable.getPageSize());
+
+        pageableRespDTO.setCount((long) count);
+        pageableRespDTO.setTotalPage(getTotalPage(count, pageable.getPageSize()));
+
+        return prepareResp(pageableRespDTO);
+    }
+
 }

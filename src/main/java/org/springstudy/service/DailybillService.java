@@ -24,4 +24,5 @@ public interface DailybillService {
      * @param accountId
      */
     void recalculateAccountDcAmount(String userId, Long accountId);
+
 }

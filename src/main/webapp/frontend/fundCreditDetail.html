@@ -26,6 +26,11 @@
         //url=?userId=10086&id=4
         console.log("url=" + url);
 
+        var userId = getFormValue(url, 'userId');
+        var AccountId = getFormValue(url, 'id');
+        var pageNumber = "1";
+        var pageSize = "50";
+
         $(document).ready(function () {
 
             $.ajax({
@@ -50,7 +55,50 @@
                 }
             });
 
+            queryMonthlyBillByUserId();
+
         })
+
+        function queryMonthlyBillByUserId() {
+            $.ajax({
+                url: "/account/queryMonthlyBill?userId=" + userId + "&AccountId=" + AccountId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize, //路径, 比如/user/create
+                type: "post",
+                data: null,
+                success: function (data, status) {
+                    //成功
+                    console.log("call success:" + JSON.stringify(data));
+                    //callback(data, status);
+
+                    var arr = data.data.results;
+
+                    var content = "";
+                    for (var index in arr) {
+                        console.log(index + ", " + JSON.stringify(arr[index]));
+
+                        var txMonth = arr[index].txMonth;
+                        var drAmount = arr[index].drAmount;
+                        var crAmount = arr[index].crAmount;
+
+                        var str = "<p><button type=\"button\" class=\"btn btn-default btn-lg btn-block\">  <div class=\"row\">  <div class=\"col-sm-6\"> " +
+                            "<div class=\"text-left\">" + txMonth + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\">本月流出 " + crAmount + "</div></div></button></p>";
+
+
+                        content += str;
+                        console.log("str=" + str);
+                    }
+
+                    document.getElementById("monthlyBills").innerHTML += content;
+
+
+                },
+                error: function (data, status) {
+                    //失败
+                    console.error("call fail:" + data);
+                    //callback(data, status);
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -96,6 +144,9 @@ ul:unorganized list
     <p>
         <button type="button" class="btn btn-primary btn-lg" onclick="submitByClick()">记一笔</button>
     </p>
+
+    <div class="container" id="monthlyBills">
+    </div>
 </div>
 
 <script type="text/javascript">
