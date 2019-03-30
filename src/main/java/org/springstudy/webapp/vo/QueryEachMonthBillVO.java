@@ -24,7 +24,7 @@ public class QueryEachMonthBillVO extends PageableReqVO{
     private String accountId;
 
     /**
-     * 账户id
+     * 月份
      */
     @NotEmpty(message = "txMonth:必须输入")
     @Length(min = 1, max = 12, message = "txMonth:长度应在{max}位之内")

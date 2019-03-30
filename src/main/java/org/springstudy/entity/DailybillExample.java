@@ -805,7 +805,145 @@ public class DailybillExample {
             return (Criteria) this;
         }
 
+        public Criteria andTxDetailIsNull() {
+            addCriterion("tx_detail is null");
+            return (Criteria) this;
+        }
 
+        public Criteria andTxDetailIsNotNull() {
+            addCriterion("tx_detail is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailEqualTo(String value) {
+            addCriterion("tx_detail =", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailNotEqualTo(String value) {
+            addCriterion("tx_detail <>", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailGreaterThan(String value) {
+            addCriterion("tx_detail >", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailGreaterThanOrEqualTo(String value) {
+            addCriterion("tx_detail >=", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailLessThan(String value) {
+            addCriterion("tx_detail <", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailLessThanOrEqualTo(String value) {
+            addCriterion("tx_detail <=", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailLike(String value) {
+            addCriterion("tx_detail like", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailNotLike(String value) {
+            addCriterion("tx_detail not like", value, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailIn(List<String> values) {
+            addCriterion("tx_detail in", values, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailNotIn(List<String> values) {
+            addCriterion("tx_detail not in", values, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailBetween(String value1, String value2) {
+            addCriterion("tx_detail between", value1, value2, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andTxDetailNotBetween(String value1, String value2) {
+            addCriterion("tx_detail not between", value1, value2, "txDetail");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdIsNull() {
+            addCriterion("icon_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdIsNotNull() {
+            addCriterion("icon_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdEqualTo(String value) {
+            addCriterion("icon_id =", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdNotEqualTo(String value) {
+            addCriterion("icon_id <>", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdGreaterThan(String value) {
+            addCriterion("icon_id >", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdGreaterThanOrEqualTo(String value) {
+            addCriterion("icon_id >=", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdLessThan(String value) {
+            addCriterion("icon_id <", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdLessThanOrEqualTo(String value) {
+            addCriterion("icon_id <=", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdLike(String value) {
+            addCriterion("icon_id like", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdNotLike(String value) {
+            addCriterion("icon_id not like", value, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdIn(List<String> values) {
+            addCriterion("icon_id in", values, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdNotIn(List<String> values) {
+            addCriterion("icon_id not in", values, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdBetween(String value1, String value2) {
+            addCriterion("icon_id between", value1, value2, "iconId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIconIdNotBetween(String value1, String value2) {
+            addCriterion("icon_id not between", value1, value2, "iconId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

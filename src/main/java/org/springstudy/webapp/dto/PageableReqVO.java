@@ -11,6 +11,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Jeff.Chen
@@ -41,10 +43,16 @@ public class PageableReqVO implements Serializable {
         pageable.setPageSize(Integer.valueOf(pageSize));
 
         Order order = new Order();
-        order.setProperty("create_time");
+        order.setProperty("tx_date");
         order.setDirection(Direction.DESC);
 
         Sort sort = new Sort();
+        //数组转成list
+
+  //      List<Order> list = new ArrayList<>();
+    //    list.add(order);
+
+        sort.setOrders(Arrays.asList(order));
 
         pageable.setSort(sort);
         pageable.setOffset(pageable.getPageNumber() * pageable.getPageSize());

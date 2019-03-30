@@ -133,7 +133,7 @@ public class DailybillController extends AbstractController {
      */
     @RequestMapping(value = "/account/queryBillByPage", method = {RequestMethod.POST, RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Resp> queryBillByPage(@ModelAttribute @Valid QueryEachMonthBillVO vo) {
-        log.info("查询每月账单:" + vo);
+        log.info("查询每日账单:" + vo);
 
 
         DailybillExample example = new DailybillExample();
@@ -144,10 +144,8 @@ public class DailybillController extends AbstractController {
                 .andTxDateGreaterThanOrEqualTo(vo.getTxMonth()+"01")
                 .andTxDateLessThanOrEqualTo(vo.getTxMonth()+"31");
 
-
         Pageable pageable = vo.getPageable();
         List<Dailybill> list = dailybillRepository.selectByPage(example, pageable);
-
 
         PageableRespDTO<Dailybill> pageableRespDTO = new PageableRespDTO<>();
         pageableRespDTO.setResults(list);

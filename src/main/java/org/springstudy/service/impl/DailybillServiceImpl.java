@@ -41,6 +41,8 @@ public class DailybillServiceImpl implements DailybillService {
             model.setRemark(vo.getRemark());
             model.setAccountId(vo.getAccountId());
             model.setTxAmount(MoneyUtils.yuanToFen(vo.getTxAmount()));
+            model.setIconId(vo.getIconId());
+            model.setTxDetail(vo.getTxDetail());
 
             //拿到账户id
             Account account = accountRepository.selectByPrimaryKey(vo.getAccountId());

@@ -76,15 +76,15 @@
                         //console.log(index + ", " + JSON.stringify(arr[index]));
 
                         var txMonth = arr[index].txMonth;
-                        var drAmount = arr[index].drAmount;
-                        var crAmount = arr[index].crAmount;
+                        var drAmount = change(arr[index].drAmount);
+                        var crAmount = change(arr[index].crAmount);
 
                         var str1 = "<div class=\"col-sm-12\"><button type=\"button\" class=\"btn dropdown-toggle btn-default btn-lg btn-block\" data-toggle=\"dropdown\" " +
                             "onclick=\"queryDailyBillByPage('{0}','{1}','{2}','0','1000', 'false')\">".format(userId, accountId, txMonth);
 
                         var str2 = "<div class=\"row\">  <div class=\"col-sm-6\"> " +
-                            "<div class=\"text-left\">" + txMonth + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\">流入 " + drAmount + "</div>  " +
-                            "<div class=\"text-right\">流出 " + crAmount + "</div></div></button>";
+                            "<div class=\"text-left\">" + txMonth + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\" style=\"color: green;\">流入 " + drAmount + "</div>  " +
+                            "<div class=\"text-right\" style=\"color: red;\">流出 " + crAmount + "</div></div></button>";
 
 
                         var str3 = "<ul class=\"dropdown-menu\" role=\"menu\" id=\"" + txMonth + "\" style='width: 100%'></ul></div>";
@@ -128,17 +128,32 @@
 
                         var txDate = arr[index].txDate;
                         var remark = arr[index].remark;
-                        var txAmount = arr[index].txAmount;
+                        var txAmount = change(arr[index].txAmount);
+
+                        var drAmount = change(arr[index].drAmount);
+                        var crAmount = change(arr[index].crAmount);
+
+                        var iconId = arr[index].iconId;
+                        var txDetail = arr[index].txDetail;
 
 //                        var str = "<li><div class=\"row\">  <div class=\"col-sm-4\"> " +
 //                            " " + txDate + "</div><div class=\"col-sm-4\"> " + remark + " " +
 //                            "<div class=\"col-sm-4\"> " + txAmount + "</div></div></li>";
 
                         var str1 = "<li><a href=\"#\"><div class=\"row\"><div class=\"col-sm-12\"><div class=\"col-sm-8\">";
-                        var str2 = "<div class=\"text-left\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\">{2}</div>".format(txDate, remark, txAmount);
+
+                        var str2 = "";
+                        if (drAmount > 0) {
+                            //表示流入
+                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: green;\">{2}</div>".format(txDate, txDetail, drAmount);
+                        } else {
+                            //表示流出
+                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: red;\">{2}</div>".format(txDate, txDetail, crAmount);
+                        }
+
                         var str3 = "</div></div></div></a></li><li class=\"divider\"></li>";
 
-                        document.getElementById("" + txMonth).innerHTML += str1 + str2+ str3;
+                        document.getElementById("" + txMonth).innerHTML += str1 + str2 + str3;
                         //console.log("str=" + str);
                     }
                     //资金账户

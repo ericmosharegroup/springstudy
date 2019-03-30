@@ -65,3 +65,8 @@ CREATE TABLE `month_bill` (
     `end_date` varchar(4) NOT NULL DEFAULT '' COMMENT '账单周期结束日期',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8 COMMENT '每月余额表';
+
+alter TABLE  daily_bill add COLUMN  `tx_detail` varchar(10) NOT NULL DEFAULT '' COMMENT '交易详情';
+alter TABLE  daily_bill add COLUMN  `icon_id` varchar(10) NOT NULL DEFAULT '' COMMENT '图标id';
+
+

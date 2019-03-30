@@ -28,4 +28,8 @@ public class Dailybill {
     private Date createTime;
 
     private Date updateTime;
+
+    private String txDetail;
+
+    private String iconId;
 }

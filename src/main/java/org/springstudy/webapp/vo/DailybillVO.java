@@ -22,4 +22,8 @@ public class DailybillVO {
 
     private String remark;
 
+    private String txDetail;
+
+    private String iconId;
+
 }
