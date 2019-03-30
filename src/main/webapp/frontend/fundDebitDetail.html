@@ -76,6 +76,8 @@
                         //console.log(index + ", " + JSON.stringify(arr[index]));
 
                         var txMonth = arr[index].txMonth;
+                        var tmp = txMonth.substring(0,4) +"年"+  txMonth.substring(4,6) +"月";
+
                         var drAmount = change(arr[index].drAmount);
                         var crAmount = change(arr[index].crAmount);
 
@@ -83,7 +85,7 @@
                             "onclick=\"queryDailyBillByPage('{0}','{1}','{2}','0','1000', 'false')\">".format(userId, accountId, txMonth);
 
                         var str2 = "<div class=\"row\">  <div class=\"col-sm-6\"> " +
-                            "<div class=\"text-left\">" + txMonth + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\" style=\"color: green;\">流入 " + drAmount + "</div>  " +
+                            "<div class=\"text-left\">" + tmp + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\" style=\"color: green;\">流入 " + drAmount + "</div>  " +
                             "<div class=\"text-right\" style=\"color: red;\">流出 " + crAmount + "</div></div></button>";
 
 
@@ -136,6 +138,10 @@
                         var iconId = arr[index].iconId;
                         var txDetail = arr[index].txDetail;
 
+                        var tmp = txDate.substring(4,6) +"月"+  txDate.substring(6,8) +"日";
+
+                        txDate =  tmp;
+
 //                        var str = "<li><div class=\"row\">  <div class=\"col-sm-4\"> " +
 //                            " " + txDate + "</div><div class=\"col-sm-4\"> " + remark + " " +
 //                            "<div class=\"col-sm-4\"> " + txAmount + "</div></div></li>";
@@ -145,10 +151,10 @@
                         var str2 = "";
                         if (drAmount > 0) {
                             //表示流入
-                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: green;\">{2}</div>".format(txDate, txDetail, drAmount);
+                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">&nbsp;{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: green;\">{2}</div>".format(txDate, txDetail, drAmount);
                         } else {
                             //表示流出
-                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: red;\">{2}</div>".format(txDate, txDetail, crAmount);
+                            str2 = "<div class=\"text-left\"><img src=\"static/icon/" + iconId + ".png\" width=\"50\" height=\"50\">&nbsp;{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\"  style=\"color: red;\">{2}</div>".format(txDate, txDetail, crAmount);
                         }
 
                         var str3 = "</div></div></div></a></li><li class=\"divider\"></li>";
@@ -232,7 +238,7 @@ ul:unorganized list
         var accountName = document.getElementById("accountName").innerText;
         var userId = document.getElementById("userId").innerText;
 
-        window.location.href = 'addBillByAccountId.html?userId=' + userId + '&id=' + accountId + '&accountName=' + accountName +
+        window.location.href = 'addBill.html?userId=' + userId + '&id=' + accountId + '&accountName=' + accountName +
             '&redirect=/frontend/fundDebitDetail.html';
     }
 </script>

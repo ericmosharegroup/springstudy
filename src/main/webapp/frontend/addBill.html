@@ -21,11 +21,22 @@
 
         var userId = getFormValue(url, 'userId');
 
+
         $(document).ready(function () {
 
-            queryAccountNameByUserId();
+            var currentDate = getNowFormatDate();
+            console.log("currentDate=" + currentDate);
 
-        })
+            document.getElementById("txDate").value = currentDate;
+            document.getElementById("txDate2").value = currentDate;
+
+            if (url.indexOf('id', 0) > 0) {
+                queryAccountByAccountId();
+            } else {
+                queryAccountNameByUserId();
+            }
+
+        });
 
         //查账户
         function queryAccountNameByUserId() {
@@ -74,6 +85,35 @@
                 }
             });
         }
+
+
+        function queryAccountByAccountId() {
+            $.ajax({
+                url: "/account/queryAccountDetail" + url, //路径, 比如/user/create
+                type: "post",
+                data: null,
+                success: function (data, status) {
+                    //成功
+                    console.log("call success:" + JSON.stringify(data));
+                    //callback(data, status);
+                    document.getElementById("accountName").innerText = data.data.accountName + data.data.remark;
+                    document.getElementById("accountId").value = data.data.id;
+                    document.getElementById("userId").value = data.data.userId;
+
+                    document.getElementById("accountName2").innerText = data.data.accountName + data.data.remark;
+                    document.getElementById("accountId2").value = data.data.id;
+                    document.getElementById("userId2").value = data.data.userId;
+
+
+                },
+                error: function (data, status) {
+                    //失败
+                    console.error("call fail:" + data);
+                    //callback(data, status);
+                }
+            });
+        }
+
 
         //表示选中操作
         function selected(userId, accountId, accountName, remark) {
@@ -174,23 +214,23 @@ ul:unorganized list
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="jieru" src="static/icon/bookshelf.png"
+                                                <img id="jieru" src="static/icon/phone.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','借入')">
+                                                     onclick="setIcon('phone','借入')">
                                                 借入
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="shouzhai" src="static/icon/music.png"
+                                                <img id="shouzhai" src="static/icon/play.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('music','收债')">
+                                                     onclick="setIcon('play','收债')">
                                                 收债
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="lixi" src="static/icon/bookshelf.png"
+                                                <img id="lixi" src="static/icon/present.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','利息')">
+                                                     onclick="setIcon('present','利息')">
                                                 利息
                                             </button>
 
@@ -204,38 +244,38 @@ ul:unorganized list
                                         <div class="btn-group btn-group-lg">
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="tuikuan" src="static/icon/bookshelf.png"
+                                                <img id="tuikuan" src="static/icon/takeoff.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('tuikuan','退款')">
+                                                     onclick="setIcon('takeoff','退款')">
                                                 退款
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="touzi" src="static/icon/bookshelf.png"
+                                                <img id="touzi" src="static/icon/target.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','投资')">
+                                                     onclick="setIcon('target','投资')">
                                                 投资
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="baoxiao" src="static/icon/bookshelf.png"
+                                                <img id="baoxiao" src="static/icon/tools.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','报销')">
+                                                     onclick="setIcon('tools','报销')">
                                                 报销
                                             </button>
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="shouyi" src="static/icon/bookshelf.png"
+                                                <img id="shouyi" src="static/icon/typography.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','收益')">
+                                                     onclick="setIcon('typography','收益')">
                                                 收益
                                             </button>
 
 
                                             <button type="button" class="btn btn-default">
-                                                <img id="qita" src="static/icon/bookshelf.png"
+                                                <img id="qita" src="static/icon/umbrella.png"
                                                      width="50" height="50"
-                                                     onclick="setIcon('bookshelf','其他')">
+                                                     onclick="setIcon('umbrella','其他')">
                                                 其他
                                             </button>
 
@@ -248,15 +288,6 @@ ul:unorganized list
                             </div>
 
                         </div>
-                        <!--&lt;!&ndash; 轮播（Carousel）导航 &ndash;&gt;-->
-                        <!--<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">-->
-                        <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
-                        <!--<span class="sr-only">Previous</span>-->
-                        <!--</a>-->
-                        <!--<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">-->
-                        <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
-                        <!--<span class="sr-only">Next</span>-->
-                        <!--</a>-->
                     </div>
 
                     <hr>
@@ -264,7 +295,7 @@ ul:unorganized list
                     <div class="form-group">
                         <div class="col-sm-4">
                             选择日期
-                            <input type="date" value="2019-02-25" name="txDate"/>
+                            <input type="date" value="2019-02-25" name="txDate" id="txDate"/>
                         </div>
 
                         <div class="col-sm-6">
@@ -278,6 +309,9 @@ ul:unorganized list
 
                     <input type="hidden" name="txType" value="Income">
 
+                    <input type="hidden" id="iconId" name="iconId">
+                    <input type="hidden" id="txDetail" name="txDetail">
+
 
                     <div class="form-group">
                         <div class="col-sm-6">
@@ -286,8 +320,6 @@ ul:unorganized list
                         </div>
                     </div>
 
-                    <input type="hidden" id="iconId" name="iconId">
-                    <input type="hidden" id="txDetail" name="txDetail">
                 </form>
             </div>
         </div>
@@ -295,56 +327,142 @@ ul:unorganized list
             <div class="container">
 
                 <form id="myForm2" class="form-horizontal" role="form" action="/dailybill/create" method="post">
-                    <div class="form-group col-sm-12">
-                        <div class="col-sm-6">
+                    <div class="container">
+                        <div class="form-group col-sm-12">
                             <div class="col-sm-6">
-                                <br/>
-                                <button type="button" class="btn btn-primary btn-lg btn-block"
-                                        data-toggle="dropdown">
+                                <div class="col-sm-6">
+                                    <br/>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block"
+                                            data-toggle="dropdown">
 
-                                    <div class="row">
-                                        <div class="text-left">
-                                            <span id="accountName2" name="accountName"></span>
+                                        <div class="row">
+                                            <div class="text-left">
+                                                <span id="accountName2" name="accountName"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" id="accountNames2">
-                                </ul>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" id="accountNames2">
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 text-right">
+                                <br/><input type="text" style="font-size: 40px;" name="txAmount" value="0.00">
                             </div>
                         </div>
+                    </div>
+                    <hr>
 
-                        <div class="col-sm-4 text-right">
-                            <br/><input type="text" style="font-size: 40px;" name="txAmount" value="0.00">
+
+                    <div class="container">
+                        <div id="myCarouse2" class="carousel slide">
+                            <!-- 轮播（Carousel）指标 -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarouse2" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarouse2" data-slide-to="1"></li>
+                            </ol>
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner" style="background:gray;">
+                                <div class="item active">
+
+                                    <div class="container">
+                                        <div class="btn-group btn-group-lg">
+                                            <button type="button" class="btn btn-default">
+                                                <img id="canyin" src="static/icon/bookshelf.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('bookshelf', '餐饮')">
+                                                餐饮
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="lingshi" src="static/icon/music.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('music','零食')">
+                                                零食
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="gouwu" src="static/icon/phone.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('phone','购物')">
+                                                购物
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="zhufang" src="static/icon/play.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('play','住房')">
+                                                住房
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="jiaotong" src="static/icon/present.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('present','交通')">
+                                                交通
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="item">
+                                    <div class="container">
+
+                                        <div class="btn-group btn-group-lg">
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="yule" src="static/icon/takeoff.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('takeoff','娱乐')">
+                                                娱乐
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="wenjiao" src="static/icon/takeoff.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('takeoff','文教')">
+                                                文教
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="qiche" src="static/icon/target.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('target','汽车')">
+                                                汽车
+                                            </button>
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="tongxun" src="static/icon/tools.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('tools','通讯')">
+                                                通讯
+                                            </button>
+
+
+                                            <button type="button" class="btn btn-default">
+                                                <img id="yuer" src="static/icon/umbrella.png"
+                                                     width="50" height="50"
+                                                     onclick="setIcon('umbrella','育儿')">
+                                                育儿
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <hr>
+
+                            </div>
                         </div>
                     </div>
 
-                    <div>
-                        <div class="form-group">
-                            <table class="table">
-                                <tbody style="font-size: 30px;">
-                                <tr>
-                                    <td>餐饮</td>
-                                    <td>零食</td>
-                                    <td>购物</td>
-                                    <td>住房</td>
-                                    <td>交通</td>
-                                </tr>
-                                <tr>
-                                    <td>娱乐</td>
-                                    <td>文教</td>
-                                    <td>汽车</td>
-                                    <td>通讯</td>
-                                    <td>育儿</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <hr>
 
                     <div class="form-group">
                         <div class="col-sm-4">
                             选择日期
-                            <input type="date" value="2019-02-25" name="txDate"/>
+                            <input type="date" value="2019-02-25" name="txDate" id="txDate2"/>
                         </div>
 
                         <div class="col-sm-6">
@@ -357,6 +475,9 @@ ul:unorganized list
                     <input type="hidden" id="userId2" name="userId">
                     <input type="hidden" name="txType" value="Expend">
 
+                    <input type="hidden" id="iconId2" name="iconId">
+                    <input type="hidden" id="txDetail2" name="txDetail">
+
 
                     <div class="form-group">
                         <div class="col-sm-6">
@@ -364,6 +485,7 @@ ul:unorganized list
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -383,7 +505,6 @@ ul:unorganized list
 
         if (formName == 'myForm1') {
             $('#myForm1').bind('submit', function () {
-                console.log("_______2_______");
 
                 ajaxSubmit(this, function (data, status) {
                     //callback 函数
@@ -441,7 +562,26 @@ ul:unorganized list
         document.getElementById('iconId').value = iconId;
         document.getElementById('txDetail').value = txDetail;
 
+        document.getElementById('iconId2').value = iconId;
+        document.getElementById('txDetail2').value = txDetail;
+    }
 
+    function resetIcon() {
+        //static/icon/music_128px.png
+        if (document.getElementById('iconId').value == null) {
+            document.getElementById('iconId').value = "bookmark";
+        }
+        if (document.getElementById('iconId2').value == null) {
+            document.getElementById('iconId2').value = "bookmark";
+        }
+
+        if (document.getElementById('txDetail').value == null) {
+            document.getElementById('txDetail').value = "其他";
+        }
+
+        if (document.getElementById('txDetail2').value == null) {
+            document.getElementById('txDetail2').value = "其他";
+        }
     }
 
 
