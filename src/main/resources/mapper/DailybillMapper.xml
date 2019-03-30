@@ -310,7 +310,8 @@
         </if>
     </select>
 
-    <select id="countMonthlyByExample" parameterType="org.springstudy.entity.DailybillExample" resultType="java.lang.Integer">
+    <select id="countMonthlyByExample" parameterType="org.springstudy.entity.DailybillExample"
+            resultType="java.lang.Integer">
         select count(1) from( select SUBSTR(tx_date,1,6) tx_month, sum(dr_amount) dr_amount, sum(cr_amount) cr_amount
         from daily_bill
         <if test="_parameter != null">

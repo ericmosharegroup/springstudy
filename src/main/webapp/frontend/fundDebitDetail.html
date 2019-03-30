@@ -27,7 +27,7 @@
         console.log("url=" + url);
 
         var userId = getFormValue(url, 'userId');
-        var AccountId = getFormValue(url, 'id');
+        var accountId = getFormValue(url, 'id');
         var pageNumber = "1";
         var pageSize = "50";
 
@@ -61,7 +61,7 @@
 
         function queryMonthlyBillByUserId() {
             $.ajax({
-                url: "/account/queryMonthlyBill?userId=" + userId + "&AccountId=" + AccountId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize, //路径, 比如/user/create
+                url: "/account/queryMonthlyBill?userId=" + userId + "&accountId=" + accountId + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize, //路径, 比如/user/create
                 type: "post",
                 data: null,
                 success: function (data, status) {
@@ -73,19 +73,24 @@
 
                     var content = "";
                     for (var index in arr) {
-                        console.log(index + ", " + JSON.stringify(arr[index]));
+                        //console.log(index + ", " + JSON.stringify(arr[index]));
 
                         var txMonth = arr[index].txMonth;
                         var drAmount = arr[index].drAmount;
                         var crAmount = arr[index].crAmount;
 
-                        var str = "<p><button type=\"button\" class=\"btn btn-default btn-lg btn-block\">  <div class=\"row\">  <div class=\"col-sm-6\"> " +
+                        var str1 = "<div class=\"col-sm-12\"><button type=\"button\" class=\"btn dropdown-toggle btn-default btn-lg btn-block\" data-toggle=\"dropdown\" " +
+                            "onclick=\"queryDailyBillByPage('{0}','{1}','{2}','0','1000', 'false')\">".format(userId, accountId, txMonth);
+
+                        var str2 = "<div class=\"row\">  <div class=\"col-sm-6\"> " +
                             "<div class=\"text-left\">" + txMonth + "</div></div><div class=\"col-sm-6\"><div class=\"text-right\">流入 " + drAmount + "</div>  " +
-                            "<div class=\"text-right\">流出 " + crAmount + "</div></div></button> </p>";
+                            "<div class=\"text-right\">流出 " + crAmount + "</div></div></button>";
 
 
-                        content += str;
-                        console.log("str=" + str);
+                        var str3 = "<ul class=\"dropdown-menu\" role=\"menu\" id=\"" + txMonth + "\" style='width: 100%'></ul></div>";
+
+                        content += str1 + str2 + str3;
+                        console.log("str=" + content);
                     }
 
                     document.getElementById("monthlyBills").innerHTML += content;
@@ -98,6 +103,55 @@
                     //callback(data, status);
                 }
             });
+        }
+
+
+        //表示选中列表
+        function queryDailyBillByPage(userId, accountId, txMonth, pageNumber, pageSize) {
+
+            //清零 + reset重置
+            document.getElementById("" + txMonth).innerHTML = "";
+
+            $.ajax({
+                url: "/account/queryBillByPage?userId=" + userId + "&accountId=" + accountId + "&txMonth=" + txMonth + "&pageNumber=" + pageNumber + "&pageSize=" + pageSize, //路径, 比如/user/create
+                type: "post",
+                data: null,
+                success: function (data, status) {
+                    //成功
+                    console.log("call success:" + JSON.stringify(data));
+                    //callback(data, status);
+
+                    var arr = data.data.results;
+
+                    for (var index in arr) {
+                        console.log(arr[index]);
+
+                        var txDate = arr[index].txDate;
+                        var remark = arr[index].remark;
+                        var txAmount = arr[index].txAmount;
+
+//                        var str = "<li><div class=\"row\">  <div class=\"col-sm-4\"> " +
+//                            " " + txDate + "</div><div class=\"col-sm-4\"> " + remark + " " +
+//                            "<div class=\"col-sm-4\"> " + txAmount + "</div></div></li>";
+
+                        var str1 = "<li><a href=\"#\"><div class=\"row\"><div class=\"col-sm-12\"><div class=\"col-sm-8\">";
+                        var str2 = "<div class=\"text-left\">{0}&nbsp;{1}</div></div><div class=\"col-sm-4\"><div class=\"text-right\">{2}</div>".format(txDate, remark, txAmount);
+                        var str3 = "</div></div></div></a></li><li class=\"divider\"></li>";
+
+                        document.getElementById("" + txMonth).innerHTML += str1 + str2+ str3;
+                        //console.log("str=" + str);
+                    }
+                    //资金账户
+
+
+                },
+                error: function (data, status) {
+                    //失败
+                    console.error("call fail:" + data);
+                    //callback(data, status);
+                }
+            });
+
         }
 
     </script>
